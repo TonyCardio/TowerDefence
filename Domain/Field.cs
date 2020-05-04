@@ -6,16 +6,18 @@ namespace TowerDefence.Domain
 {
     public class Field
     {
+        public FieldCell[,] Cells { get; set; }
         public int Width { get; set; }
         public int Height { get; set; }
         public List<Turret> Turrets { get; set; }
         public Castle Castle { get; set; }
 
 
-        public Field(int width, int height)
+        public Field(FieldCell[,] cells)
         {
-            Width = width;
-            Height = height;
+            Cells = cells;
+            Width = cells.GetLength(0);
+            Height = cells.GetLength(1);
         }
 
         public void AddTurret(Turret turret)

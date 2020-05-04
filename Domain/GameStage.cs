@@ -2,9 +2,9 @@
 {
     public enum GameStage
     {
-        NotStarted = 0,
-        SettingTurrets = 1,
-        MobsWaves = 2,
+        MainMenu = 0,
+        ChoosingLevel = 1,
+        RunningLevel = 2,
         Finished = 3
     }
 }

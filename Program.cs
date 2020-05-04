@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using TowerDefence.Domain;
 using TowerDefence.View;
 
 namespace TowerDefence
@@ -23,9 +24,7 @@ namespace TowerDefence
         /*
          * 
          * TODO
-         *  Field:
-         *      Формирование массива клеток
-         *      Сущность разных клеток (enum)
+         *  
          *  
          * 
          * 

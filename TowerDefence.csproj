@@ -49,10 +49,14 @@
     <Compile Include="Domain\Castle.cs" />
     <Compile Include="Domain\Enemy.cs" />
     <Compile Include="Domain\Field.cs" />
+    <Compile Include="Domain\FieldCell.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />
     <Compile Include="Domain\IEnemy.cs" />
     <Compile Include="Domain\ITurret.cs" />
+    <Compile Include="Domain\Level.cs" />
+    <Compile Include="Domain\LevelsLoader.cs" />
+    <Compile Include="Domain\LevelStage.cs" />
     <Compile Include="Domain\Player.cs" />
     <Compile Include="Domain\Turret.cs" />
     <Compile Include="Program.cs" />
@@ -93,6 +97,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Levels\First.txt" />
+    <Content Include="Levels\Second.txt" />
+    <Content Include="Levels\Third.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
