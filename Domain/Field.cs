@@ -11,6 +11,7 @@ namespace TowerDefence.Domain
         public List<Turret> Turrets { get; set; }
         public Castle Castle { get; set; }
 
+
         public Field(int width, int height)
         {
             Width = width;
