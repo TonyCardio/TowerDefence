@@ -47,6 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Castle.cs" />
+    <Compile Include="Domain\Direction.cs" />
+    <Compile Include="Domain\EnemyType.cs" />
+    <Compile Include="Domain\Point.cs" />
     <Compile Include="Domain\Enemy.cs" />
     <Compile Include="Domain\Field.cs" />
     <Compile Include="Domain\FieldCell.cs" />
