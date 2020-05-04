@@ -29,32 +29,32 @@ namespace TowerDefence.Domain
 
         public Point Position { get; set; }
 
-        public List<Point> Path { get; set; }
+        public List<Point> PathSpawnToCastle { get; set; }
 
         public Enemy(List<Point> path, EnemyType type)
         {
             if (path is null || path.Count < 1)
-                throw new ArgumentNullException("Некорректный путь");
-            Path = path;
+                throw new ArgumentNullException("Incorrect path from spawn to castle");
+            PathSpawnToCastle = path;
             Position = path[0];
             Type = type;
         }
 
         public bool IsLife() => Health > 0;
 
-        public bool IsAtCastle() => (Position == Path[Path.Count - 1]);
+        public bool IsAtCastle() => (Position == PathSpawnToCastle[PathSpawnToCastle.Count - 1]);
 
         public void Move()
         {
             Direction direction = Direction.Stay;
-            for (var i = 1; i < Path.Count; i++)
+            for (var i = 1; i < PathSpawnToCastle.Count; i++)
             {
-                var deltaPoint = Position - Path[i];
+                var deltaPoint = Position - PathSpawnToCastle[i];
                 if (deltaPoint.X == 1) direction = Direction.Right;
                 if (deltaPoint.X == -1) direction = Direction.Left;
                 if (deltaPoint.Y == 1) direction = Direction.Up;
                 if (deltaPoint.Y == -1) direction = Direction.Down;
-                Position = Path[i];
+                Position = PathSpawnToCastle[i];
                 Shift(this, new ShiftEventArgs { Direction = direction});
             }
         }
