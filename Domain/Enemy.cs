@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Drawing;
 using System;
 
 namespace TowerDefence.Domain
@@ -27,11 +28,11 @@ namespace TowerDefence.Domain
 
         public float Speed { get; set; }
 
-        public Point Position { get; set; }
+        public PointF Position { get; set; }
 
-        public List<Point> PathSpawnToCastle { get; set; }
+        public List<PointF> PathSpawnToCastle { get; set; }
 
-        public Enemy(List<Point> path, EnemyType type)
+        public Enemy(List<PointF> path, EnemyType type)
         {
             if (path is null || path.Count < 1)
                 throw new ArgumentNullException("Incorrect path from spawn to castle");
@@ -49,11 +50,11 @@ namespace TowerDefence.Domain
             Direction direction = Direction.Stay;
             for (var i = 1; i < PathSpawnToCastle.Count; i++)
             {
-                var deltaPoint = Position - PathSpawnToCastle[i];
-                if (deltaPoint.X == 1) direction = Direction.Right;
-                if (deltaPoint.X == -1) direction = Direction.Left;
-                if (deltaPoint.Y == 1) direction = Direction.Up;
-                if (deltaPoint.Y == -1) direction = Direction.Down;
+                var deltaPoint = new PointF(PathSpawnToCastle[i].X - Position.X, PathSpawnToCastle[i].Y - Position.Y);
+                if (deltaPoint.X - 1 < 1e10) direction = Direction.Right;
+                if (deltaPoint.X + 1 < 1e10) direction = Direction.Left;
+                if (deltaPoint.Y - 1 < 1e10) direction = Direction.Up;
+                if (deltaPoint.Y + 1 < 1e10) direction = Direction.Down;
                 Position = PathSpawnToCastle[i];
                 Shift(this, new ShiftEventArgs { Direction = direction});
             }
