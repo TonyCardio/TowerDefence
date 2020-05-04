@@ -4,5 +4,6 @@
     {
         public int Health { get; set; }
         public int PunchPower { get; set; }
+        //2222
     }
 }

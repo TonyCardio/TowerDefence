@@ -10,4 +10,6 @@ namespace TowerDefence.Domain
         public Player Player { get; set; }
         public Field Field { get; set; }
     }
+
+
 }
