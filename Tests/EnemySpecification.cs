@@ -12,8 +12,6 @@ namespace TowerDefence.Tests
     {
         private List<Point> pathSpawnToCastle = new List<Point>() { new Point(0, 0), new Point(0, 1) };
         private Enemy enemy;
-        
-        
         [Test]
         public void CreateHighSkeletonWithCorrectPath_CheckProperties()
         {
@@ -59,7 +57,7 @@ namespace TowerDefence.Tests
             pathSpawnToCastle = new List<Point>() { new Point(0, 0), new Point(0, 1), new Point(1, 1) };
             enemy = new GreenMonster(pathSpawnToCastle);
             enemy.Move();
-            enemy.Position.Should().Be(new Point(1, 1));
+            enemy.IsAtCastle().Should().BeTrue();
         }
 
         [Test]

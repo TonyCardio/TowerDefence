@@ -4,22 +4,8 @@ using System;
 
 namespace TowerDefence.Domain
 {
-   public class ShiftEventArgs : EventArgs
-    {
-        public Direction Direction { get; set; }
-    }
-
-    public delegate void ShiftEventHandler(object sender, ShiftEventArgs args);
-
     public class Enemy : IEnemy
     {
-        public event ShiftEventHandler Shift;
-
-        protected virtual void OnShift(object sender, ShiftEventArgs args)
-        {
-            if (Shift != null)            
-                Shift(sender, args);            
-        }
 
         public int CountMoveLeftFrames { get; set; }
         public int CountMoveRightFrames { get; set; }
