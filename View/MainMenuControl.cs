@@ -17,9 +17,7 @@ namespace TowerDefence.View
         {
             if (this.game != null)
                 return;
-
             this.game = game;
-
             startButton.Click += LevelsButton_Click;
         }
 

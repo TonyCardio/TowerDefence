@@ -22,10 +22,7 @@ namespace TowerDefence
         }
 
         /*
-         * 
          * TODO
-         *      LevelLoader
-         *          Проверка на единственность замка и места спавна
          *  
          *  
          * 
