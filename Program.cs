@@ -18,12 +18,16 @@ namespace TowerDefence
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            var c = LevelsLoader.GetLevelsNames().ToList()[0];
+            var a = LevelsLoader.LoadLevelByName(c);
             Application.Run(new MainForm());
         }
 
         /*
          * 
          * TODO
+         *      LevelLoader
+         *          Проверка на единственность замка и места спавна
          *  
          *  
          * 

@@ -25,7 +25,7 @@ namespace TowerDefence.Domain
             return LoadLevelFromLines(levelInputData.Split('|'), levelName);
         }
 
-        private static Level LoadLevelFromLines(string[] mapWaves, string levelName)
+        public static Level LoadLevelFromLines(string[] mapWaves, string levelName)
         {
             var map = mapWaves[0].Split(new[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
             var height = map.Length;
