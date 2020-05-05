@@ -12,9 +12,9 @@ namespace TowerDefence.Domain
         public GreenMonster(List<Point> pathSpawnToCastle) : base(pathSpawnToCastle, 20 , 5, 2, 3, 3, 3, 3, 6 , 8) { }
 
         /*
-         health - 25
-         punchPower - 10
-         speed - 1
+         health - 20
+         punchPower - 5
+         speed - 2
          countMoveLeftFrames - 3
          countMoveRightFrames - 3
          countMoveUpFrames - 3

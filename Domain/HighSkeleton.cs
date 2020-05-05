@@ -11,7 +11,7 @@ namespace TowerDefence.Domain
     {
         public HighSkeleton(List<Point> pathSpawnToCastle) : base(pathSpawnToCastle, 30, 10, 1, 6, 6, 6, 6, 5 , 10) { }
         /*
-         health - 25
+         health - 30
          punchPower - 10
          speed - 1
          countMoveLeftFrames - 6

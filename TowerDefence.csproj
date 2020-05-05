@@ -81,6 +81,7 @@
     <Compile Include="Domain\Turret.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\EnemySpecification.cs" />
     <Compile Include="Tests\LevelLoaderSpecification.cs" />
     <Compile Include="View\FieldControl.cs">
       <SubType>UserControl</SubType>
@@ -136,7 +137,9 @@
     <Content Include="Levels\Third.txt" />
     <None Include="Resourses\MainMenu.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resourses\Sprites\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

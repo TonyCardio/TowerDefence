@@ -43,7 +43,7 @@ namespace TowerDefence.Domain
             int countMoveDownFrames, int width, int height)
         {
             if (path is null || path.Count < 1)
-                throw new ArgumentNullException("Incorrect path from spawn to castle");
+                throw new Exception("Incorrect path from spawn to castle");
 
             PathSpawnToCastle = path;
             Position = path[0];
@@ -73,7 +73,7 @@ namespace TowerDefence.Domain
                 if (deltaPoint.Y == 1) direction = Direction.Up;
                 if (deltaPoint.Y == -1) direction = Direction.Down;
                 Position = PathSpawnToCastle[i];
-                Shift(this, new ShiftEventArgs { Direction = direction}); //Happened event of move Enemy
+                //Shift(this, new ShiftEventArgs { Direction = direction}); //Happened event of move Enemy
             }
         }
     }
