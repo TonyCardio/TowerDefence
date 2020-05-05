@@ -7,17 +7,18 @@ namespace TowerDefence.Domain
     public class Field
     {
         public FieldCell[,] Cells { get; set; }
-        public int Width { get; set; }
-        public int Height { get; set; }
+        public Point CastlePos { get; set; }
+        public Point EnemySpawnPos { get; set; }
+        public int Width { get { return Cells.GetLength(0); } }
+        public int Height { get { return Cells.GetLength(1); } }
         public List<Turret> Turrets { get; set; }
         public Castle Castle { get; set; }
 
-
-        public Field(FieldCell[,] cells)
+        public Field(FieldCell[,] cells, Point castlePosition, Point enemySpawnPosition)
         {
             Cells = cells;
-            Width = cells.GetLength(0);
-            Height = cells.GetLength(1);
+            CastlePos = castlePosition;
+            EnemySpawnPos = enemySpawnPosition;
         }
 
         public void AddTurret(Turret turret)

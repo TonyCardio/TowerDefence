@@ -11,10 +11,10 @@ namespace TowerDefence.Domain
         public List<Point> PathSpawnToCastle { get; set; }
         public int WavesCount { get; set; }
 
-        public Level(string name, FieldCell[,] field, int wavesCount)
+        public Level(string name, Field field, int wavesCount)
         {
             Name = name;
-            Field = new Field(field);
+            Field = field;
             WavesCount = wavesCount;
         }
     }
