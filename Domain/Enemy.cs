@@ -20,25 +20,42 @@ namespace TowerDefence.Domain
             if (Shift != null)            
                 Shift(sender, args);            
         }
-        public EnemyType Type { get; set; }
+
+        public int CountMoveLeftFrames { get; set; }
+        public int CountMoveRightFrames { get; set; }
+        public int CountMoveUpFrames { get; set; }
+        public int CountMoveDownFrames { get; set; }
+        public int Height { get; set; }
+        public int Widht { get; set; }
 
         public int Health { get; set; }
 
         public int PunchPower { get; set; }
 
-        public float Speed { get; set; }
+        public int Speed { get; set; }
 
         public Point Position { get; set; }
         
         public List<Point> PathSpawnToCastle { get; set; } 
 
-        public Enemy(List<Point> path, EnemyType type)
+        public Enemy(List<Point> path , int health, int punchPower, int speed , 
+            int countMoveLeftFrames , int countMoveRightFrames, int countMoveUpFrames, 
+            int countMoveDownFrames, int width, int height)
         {
             if (path is null || path.Count < 1)
                 throw new ArgumentNullException("Incorrect path from spawn to castle");
+
             PathSpawnToCastle = path;
             Position = path[0];
-            Type = type;
+            Health = health;
+            PunchPower = punchPower;
+            Speed = speed;
+            CountMoveDownFrames = countMoveDownFrames;
+            CountMoveLeftFrames = countMoveLeftFrames;
+            CountMoveRightFrames = countMoveRightFrames;
+            CountMoveUpFrames = countMoveUpFrames;
+            Height = height;
+            Widht = width;
         }
 
         public bool IsLife() => Health > 0;
@@ -56,7 +73,7 @@ namespace TowerDefence.Domain
                 if (deltaPoint.Y == 1) direction = Direction.Up;
                 if (deltaPoint.Y == -1) direction = Direction.Down;
                 Position = PathSpawnToCastle[i];
-                Shift(this, new ShiftEventArgs { Direction = direction});
+                Shift(this, new ShiftEventArgs { Direction = direction}); //Happened event of move Enemy
             }
         }
     }

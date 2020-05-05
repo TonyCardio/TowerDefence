@@ -64,18 +64,20 @@
   <ItemGroup>
     <Compile Include="Domain\Castle.cs" />
     <Compile Include="Domain\Direction.cs" />
-    <Compile Include="Domain\EnemyType.cs" />
     <Compile Include="Domain\Enemy.cs" />
     <Compile Include="Domain\Field.cs" />
     <Compile Include="Domain\FieldCell.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />
+    <Compile Include="Domain\GreenMonster.cs" />
+    <Compile Include="Domain\HighSkeleton.cs" />
     <Compile Include="Domain\IEnemy.cs" />
     <Compile Include="Domain\ITurret.cs" />
     <Compile Include="Domain\Level.cs" />
     <Compile Include="Domain\LevelsLoader.cs" />
     <Compile Include="Domain\LevelStage.cs" />
     <Compile Include="Domain\Player.cs" />
+    <Compile Include="Domain\ShortSkeleton.cs" />
     <Compile Include="Domain\Turret.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
