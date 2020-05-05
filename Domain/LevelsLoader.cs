@@ -6,11 +6,10 @@ using System.Linq;
 
 namespace TowerDefence.Domain
 {
-    public static partial class LevelsLoader
+    public static class LevelsLoader
     {
         public static readonly DirectoryInfo LevelsFolder = new DirectoryInfo(
             Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..", "..", "Levels"));
-
 
         public static IEnumerable<string> GetLevelsNames()
         {

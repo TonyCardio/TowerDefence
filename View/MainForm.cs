@@ -16,12 +16,11 @@ namespace TowerDefence.View
         private Game game;
         public MainForm()
         {
-            InitializeComponent();
-
             game = new Game();
+            InitializeComponent();
             game.StateChanged += OnStageChanged;
 
-            ShowMainMenu();
+            ShowScreen(mainMenuControl);
         }
 
         private void OnStageChanged(GameStage stage)
@@ -29,10 +28,10 @@ namespace TowerDefence.View
             switch (stage)
             {
                 case GameStage.MainMenu:
-                    ShowMainMenu();
+                    ShowScreen(mainMenuControl);
                     break;
                 case GameStage.ChoosingLevel:
-                    ShowLevels();
+                    ShowScreen(levelsControl);
                     break;
                 case GameStage.RunningLevel:
                     ShowLevelScreen();
@@ -41,9 +40,15 @@ namespace TowerDefence.View
                     ShowFinishedScreen();
                     break;
                 default:
-                    ShowMainMenu();
+                    ShowScreen(mainMenuControl);
                     break;
             }
+        }
+
+        private void ShowScreen(UserControl screen)
+        {
+            HideScreens();
+            screen.Show();
         }
 
         private void ShowFinishedScreen()
@@ -56,20 +61,10 @@ namespace TowerDefence.View
             throw new NotImplementedException();
         }
 
-        private void ShowLevels()
+        private void HideScreens()
         {
-            throw new NotImplementedException();
-        }
-
-        private void ShowMainMenu()
-        {
-            mainMenuControl.Configure(game);
-            mainMenuControl.Show();
-        }
-
-        private void mainMenuControl_Load(object sender, EventArgs e)
-        {
-
+            mainMenuControl.Hide();
+            levelsControl.Hide();
         }
     }
 }
