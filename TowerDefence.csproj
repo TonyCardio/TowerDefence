@@ -82,6 +82,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\LevelLoaderSpecification.cs" />
+    <Compile Include="Tests\PathFinderSpecification.cs" />
     <Compile Include="View\FieldControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
