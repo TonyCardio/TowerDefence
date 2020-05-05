@@ -19,10 +19,12 @@ namespace TowerDefence.View
             InitializeComponent();
 
             game = new Game();
-            game.StateChanged += OnStateChanged;
+            game.StateChanged += OnStageChanged;
+
+            ShowMainMenu();
         }
 
-        private void OnStateChanged(GameStage stage)
+        private void OnStageChanged(GameStage stage)
         {
             switch (stage)
             {
@@ -61,7 +63,13 @@ namespace TowerDefence.View
 
         private void ShowMainMenu()
         {
-            throw new NotImplementedException();
+            mainMenuControl.Configure(game);
+            mainMenuControl.Show();
+        }
+
+        private void mainMenuControl_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

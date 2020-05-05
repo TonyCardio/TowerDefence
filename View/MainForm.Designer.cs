@@ -28,59 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.checkBox2 = new System.Windows.Forms.CheckBox();
+            this.mainMenuControl = new TowerDefence.View.MainMenuControl();
             this.SuspendLayout();
             // 
-            // button1
+            // mainMenuControl
             // 
-            this.button1.Location = new System.Drawing.Point(239, 136);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(161, 82);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "Артём пидор";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(488, 136);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(56, 24);
-            this.checkBox1.TabIndex = 1;
-            this.checkBox1.Text = "Да";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // checkBox2
-            // 
-            this.checkBox2.AutoSize = true;
-            this.checkBox2.Location = new System.Drawing.Point(488, 194);
-            this.checkBox2.Name = "checkBox2";
-            this.checkBox2.Size = new System.Drawing.Size(140, 24);
-            this.checkBox2.TabIndex = 2;
-            this.checkBox2.Text = "Определённо\r\n";
-            this.checkBox2.UseVisualStyleBackColor = true;
+            this.mainMenuControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.mainMenuControl.Location = new System.Drawing.Point(0, 0);
+            this.mainMenuControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.mainMenuControl.Name = "mainMenuControl";
+            this.mainMenuControl.Size = new System.Drawing.Size(800, 600);
+            this.mainMenuControl.TabIndex = 0;
+            this.mainMenuControl.Load += new System.EventHandler(this.mainMenuControl_Load);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.checkBox2);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.Controls.Add(this.mainMenuControl);
             this.Name = "MainForm";
-            this.Text = "MainForm";
+            this.Text = "TowerDefence";
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.CheckBox checkBox2;
+        private MainMenuControl mainMenuControl;
     }
 }
