@@ -4,9 +4,20 @@ using System;
 
 namespace TowerDefence.Domain
 {
+    public class PositionChangingArgs : EventArgs
+    {
+        public Direction Direction;
+        public Point CurrentPosition;
+    }
     public class Enemy : IEnemy
     {
+        public delegate void PositionChangingHandler(PositionChangingArgs args);
+        public event PositionChangingHandler PositionChanging;
 
+        public void OnPositionChanging(PositionChangingArgs args)
+        {
+            if (PositionChanging != null) PositionChanging(args);
+        }
         public int CountMoveLeftFrames { get; set; }
         public int CountMoveRightFrames { get; set; }
         public int CountMoveUpFrames { get; set; }
@@ -58,8 +69,8 @@ namespace TowerDefence.Domain
                 if (deltaPoint.X == -1) direction = Direction.Left;
                 if (deltaPoint.Y == 1) direction = Direction.Up;
                 if (deltaPoint.Y == -1) direction = Direction.Down;
+                OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
                 Position = PathSpawnToCastle[i];
-                //Shift(this, new ShiftEventArgs { Direction = direction}); //Happened event of move Enemy
             }
         }
     }
