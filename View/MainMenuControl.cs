@@ -8,22 +8,23 @@ namespace TowerDefence.View
     {
         private Game game;
 
-        public MainMenuControl()
+        public MainMenuControl(Game game)
         {
-            InitializeComponent();
-        }
-
-        public void Configure(Game game)
-        {
-            if (this.game != null)
-                return;
             this.game = game;
-            startButton.Click += LevelsButton_Click;
+            InitializeComponent();
+            startButton.Click += BeginGame_Click;
         }
 
-        private void LevelsButton_Click(object sender, EventArgs e)
+        //public void Configure(Game game)
+        //{
+        //    if (this.game != null)
+        //        return;
+        //    this.game = game;
+        //}
+
+        private void BeginGame_Click(object sender, EventArgs e)
         {
-            game.ChoseLevel();
+            game.StartChooseLevel();
         }
     }
 }

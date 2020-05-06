@@ -28,7 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.mainMenuControl = new TowerDefence.View.MainMenuControl();
+            this.mainMenuControl = new MainMenuControl(game);
+            this.levelsControl = new LevelsControl(game);
             this.SuspendLayout();
             // 
             // mainMenuControl
@@ -39,7 +40,15 @@
             this.mainMenuControl.Name = "mainMenuControl";
             this.mainMenuControl.Size = new System.Drawing.Size(800, 600);
             this.mainMenuControl.TabIndex = 0;
-            this.mainMenuControl.Load += new System.EventHandler(this.mainMenuControl_Load);
+            //
+            // levelsControl
+            //
+            this.levelsControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.levelsControl.Location = new System.Drawing.Point(0, 0);
+            this.levelsControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.levelsControl.Name = "levelsControl";
+            this.levelsControl.Size = new System.Drawing.Size(800, 600);
+            this.levelsControl.TabIndex = 1;
             // 
             // MainForm
             // 
@@ -47,6 +56,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 600);
             this.Controls.Add(this.mainMenuControl);
+            this.Controls.Add(this.levelsControl);
             this.Name = "MainForm";
             this.Text = "TowerDefence";
             this.ResumeLayout(false);
@@ -56,5 +66,6 @@
         #endregion
 
         private MainMenuControl mainMenuControl;
+        private LevelsControl levelsControl;
     }
 }
