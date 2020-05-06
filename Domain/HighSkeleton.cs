@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace TowerDefence.Domain
 {
-    class HighSkeleton : Enemy
+    public class HighSkeleton : Enemy
     {
-        public HighSkeleton(List<Point> pathSpawnToCastle) : base(pathSpawnToCastle, 30, 10, 1, 6, 6, 6, 6, 5 , 10) { }
+        public HighSkeleton(List<Point> pathSpawnToCastle) : base(pathSpawnToCastle, 30, 10, 1, 6, 6, 6, 6, 5, 10) { }
         /*
          health - 30
          punchPower - 10

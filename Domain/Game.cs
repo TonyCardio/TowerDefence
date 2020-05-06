@@ -38,8 +38,8 @@ namespace TowerDefence.Domain
 
         public void StartLevel(string levelName)
         {
-            ChangeStage(GameStage.RunningLevel);
             RunLevel(levelName);
+            ChangeStage(GameStage.RunningLevel);
         }
 
         private void ChangeStage(GameStage stage)
