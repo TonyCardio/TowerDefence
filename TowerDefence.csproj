@@ -148,7 +148,7 @@
     <Content Include="Levels\Second.txt" />
     <Content Include="Levels\Third.txt" />
     <Content Include="Resourses\Sprites\HighSkeletonAndGreenMonster.png" />
-    <Content Include="Resourses\Sprites\SmaleSkeleton.png" />
+    <Content Include="Resourses\Sprites\SmallSkeleton.png" />
     <None Include="Resourses\MainMenu.jpg" />
   </ItemGroup>
   <ItemGroup />
