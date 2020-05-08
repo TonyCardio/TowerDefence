@@ -13,6 +13,7 @@ namespace TowerDefence.Domain
     {
         public delegate void PositionChangingHandler(PositionChangingArgs args);
         public event PositionChangingHandler PositionChanging;
+        public event Action PathSpawnToCastlePassed;
 
         public void OnPositionChanging(PositionChangingArgs args)
         {
@@ -34,6 +35,8 @@ namespace TowerDefence.Domain
         public Point Position { get; set; }
 
         public List<Point> PathSpawnToCastle { get; set; }
+
+        public int currentIndexOfPath { get; set; }
 
         public Enemy(List<Point> path, int health, int punchPower, int speed,
             int countMoveLeftFrames, int countMoveRightFrames, int countMoveUpFrames,
@@ -57,10 +60,27 @@ namespace TowerDefence.Domain
 
         public bool IsLife() => Health > 0;
 
-        public bool IsAtCastle() => (Position == PathSpawnToCastle[PathSpawnToCastle.Count - 1]);
+        public bool IsAtCastle() => (currentIndexOfPath == PathSpawnToCastle.Count - 1);
 
         public void MakeStep()
-        { }
+        {
+            Direction direction = Direction.Stay;
+            if (!IsAtCastle())
+                currentIndexOfPath++;
+            else
+            {
+                PathSpawnToCastlePassed(); //The enemy came to the castle
+                return;
+            }
+            var deltaPoint = new PointF(PathSpawnToCastle[currentIndexOfPath].X - Position.X, 
+                PathSpawnToCastle[currentIndexOfPath].Y - Position.Y);
+            if (deltaPoint.X == 1) direction = Direction.Right;
+            if (deltaPoint.X == -1) direction = Direction.Left;
+            if (deltaPoint.Y == 1) direction = Direction.Up;
+            if (deltaPoint.Y == -1) direction = Direction.Down;
+            OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
+            Position = PathSpawnToCastle[currentIndexOfPath];
+        }
 
         public void Move()
         {
