@@ -73,6 +73,7 @@
     <Compile Include="Domain\GameStage.cs" />
     <Compile Include="Domain\GreenMonster.cs" />
     <Compile Include="Domain\HighSkeleton.cs" />
+    <Compile Include="Domain\HorizontalTurret.cs" />
     <Compile Include="Domain\IEnemy.cs" />
     <Compile Include="Domain\ITurret.cs" />
     <Compile Include="Domain\Level.cs" />
@@ -82,6 +83,7 @@
     <Compile Include="Domain\ShortSkeleton.cs" />
     <Compile Include="Domain\SinglyLinkedList.cs" />
     <Compile Include="Domain\Turret.cs" />
+    <Compile Include="Domain\VerticalTurret.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\EnemySpecification.cs" />

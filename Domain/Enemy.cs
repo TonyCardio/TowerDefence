@@ -19,6 +19,12 @@ namespace TowerDefence.Domain
         {
             if (PositionChanging != null) PositionChanging(args);
         }
+
+        public void OnPathSpawnToCastlePassed()
+        {
+            if (PathSpawnToCastlePassed != null)
+                PathSpawnToCastlePassed();
+        }
         public int CountMoveLeftFrames { get; set; }
         public int CountMoveRightFrames { get; set; }
         public int CountMoveUpFrames { get; set; }
@@ -69,7 +75,7 @@ namespace TowerDefence.Domain
                 currentIndexOfPath++;
             else
             {
-                PathSpawnToCastlePassed(); //The enemy came to the castle
+                OnPathSpawnToCastlePassed(); //The enemy came to the castle
                 return;
             }
             var deltaPoint = new PointF(PathSpawnToCastle[currentIndexOfPath].X - Position.X, 
@@ -82,6 +88,7 @@ namespace TowerDefence.Domain
             Position = PathSpawnToCastle[currentIndexOfPath];
         }
 
+        /*
         public void Move()
         {
             Direction direction = Direction.Stay;
@@ -96,5 +103,7 @@ namespace TowerDefence.Domain
                 Position = PathSpawnToCastle[i];
             }
         }
+        May be useful in future 
+        */
     }
 }
