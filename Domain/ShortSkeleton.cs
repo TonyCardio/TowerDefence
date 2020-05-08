@@ -9,7 +9,7 @@ namespace TowerDefence.Domain
 {
     public class ShortSkeleton : Enemy
     {
-        public ShortSkeleton(List<Point> pathSpawnToCastle) : base(pathSpawnToCastle, 25, 5, 2, 8 , 8 , 8 , 8, 6 , 8) { }
+        public ShortSkeleton(List<Point> pathSpawnToCastle) : base(pathSpawnToCastle, 25, 5, 2, 8, 8, 8, 8, 6, 8) { }
 
         /*
          health - 25

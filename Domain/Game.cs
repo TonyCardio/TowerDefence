@@ -13,10 +13,17 @@ namespace TowerDefence.Domain
         public event Action<GameStage> StateChanged;
         public Player Player { get; set; }
         public List<Level> Levels { get; set; }
+        public Level CurrentLevel { get; private set; }
 
         public Game()
         {
             Levels = LoadLevels();
+        }
+
+        public void RunLevel()
+        {
+            CurrentLevel.Run();
+            ChangeStage(GameStage.RunningLevel);
         }
 
         private List<Level> LoadLevels()
@@ -27,19 +34,17 @@ namespace TowerDefence.Domain
             return levels;
         }
 
-        private void RunLevel(string levelName)
-        {
-        }
-
         public void StartChooseLevel()
         {
             ChangeStage(GameStage.ChoosingLevel);
         }
 
-        public void StartLevel(string levelName)
+        public void ChoseLevel(string levelName)
         {
-            RunLevel(levelName);
-            ChangeStage(GameStage.RunningLevel);
+            CurrentLevel = Levels
+                .Where(lvl => lvl.Name == levelName)
+                .FirstOrDefault();
+            ChangeStage(GameStage.LevelNotStarted);
         }
 
         private void ChangeStage(GameStage stage)

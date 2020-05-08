@@ -38,7 +38,7 @@
             this.mainMenuControl.Location = new System.Drawing.Point(0, 0);
             this.mainMenuControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.mainMenuControl.Name = "mainMenuControl";
-            this.mainMenuControl.Size = new System.Drawing.Size(800, 600);
+            this.mainMenuControl.Size = new System.Drawing.Size(1920, 1080);
             this.mainMenuControl.TabIndex = 0;
             //
             // levelsControl
@@ -54,7 +54,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 600);
+            this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.mainMenuControl);
             this.Controls.Add(this.levelsControl);
             this.Name = "MainForm";

@@ -53,7 +53,21 @@ namespace TowerDefence.Domain
             if (castlePos.Count > 1 || spawnPos.Count > 1)
                 throw new ArgumentException("Make sure input map contains one Castle and Spawn point");
             var field = new Field(cells, castlePos.FirstOrDefault(), spawnPos.FirstOrDefault());
-            return new Level(levelName, field, waves);
+            var path = CreateEnemiesPath(field);
+            return new Level(levelName, field, path, waves);
+        }
+
+        private static List<Point> CreateEnemiesPath(Field field)
+        {
+            var path = Extensions.BFS(field, field.EnemySpawnPos, field.CastlePos);
+            var result = new List<Point>();
+            result.Add(path.Value);
+            while ((path?.Previous ?? null) != null)
+            {
+                result.Add(path.Previous.Value);
+                path = path.Previous;
+            }
+            return result.Count != 1 ? result : throw new ArgumentException("Can`t find path to Castle");
         }
     }
 

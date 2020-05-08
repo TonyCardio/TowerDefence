@@ -4,7 +4,8 @@
     {
         MainMenu = 0,
         ChoosingLevel = 1,
-        RunningLevel = 2,
-        Finished = 3
+        LevelNotStarted = 2,
+        RunningLevel = 3,
+        Finished = 4
     }
 }
