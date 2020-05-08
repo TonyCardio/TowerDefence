@@ -32,11 +32,11 @@ namespace TowerDefence.Domain
         public int Speed { get; set; }
 
         public Point Position { get; set; }
-        
-        public List<Point> PathSpawnToCastle { get; set; } 
 
-        public Enemy(List<Point> path , int health, int punchPower, int speed , 
-            int countMoveLeftFrames , int countMoveRightFrames, int countMoveUpFrames, 
+        public List<Point> PathSpawnToCastle { get; set; }
+
+        public Enemy(List<Point> path, int health, int punchPower, int speed,
+            int countMoveLeftFrames, int countMoveRightFrames, int countMoveUpFrames,
             int countMoveDownFrames, int width, int height)
         {
             if (path is null || path.Count < 1)
@@ -58,6 +58,9 @@ namespace TowerDefence.Domain
         public bool IsLife() => Health > 0;
 
         public bool IsAtCastle() => (Position == PathSpawnToCastle[PathSpawnToCastle.Count - 1]);
+
+        public void MakeStep()
+        { }
 
         public void Move()
         {

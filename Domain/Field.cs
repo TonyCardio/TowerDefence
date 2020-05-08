@@ -6,24 +6,19 @@ namespace TowerDefence.Domain
 {
     public class Field
     {
-        public FieldCell[,] Cells { get; set; }
+        public Cell[,] Cells { get; set; }
         public Point CastlePos { get; set; }
         public Point EnemySpawnPos { get; set; }
         public int Width { get { return Cells.GetLength(0); } }
         public int Height { get { return Cells.GetLength(1); } }
-        public List<Turret> Turrets { get; set; }
         public Castle Castle { get; set; }
+        private readonly HashSet<ITurret> turrets = new HashSet<ITurret>();
 
-        public Field(FieldCell[,] cells, Point castlePosition, Point enemySpawnPosition)
+        public Field(Cell[,] cells, Point castlePosition, Point enemySpawnPosition)
         {
             Cells = cells;
             CastlePos = castlePosition;
             EnemySpawnPos = enemySpawnPosition;
-        }
-
-        public void AddTurret(Turret turret)
-        {
-            throw new NotImplementedException();
         }
 
         public IReadOnlyList<ITurret> GetTurrets()
@@ -33,8 +28,9 @@ namespace TowerDefence.Domain
 
         public bool PutTurret(ITurret turret, Point point)
         {
-            throw new NotImplementedException();
-
+            if (Cells[point.X, point.Y]?.IsTurret == null)
+                throw new InvalidOperationException();
+            return true;
             /*
              * Tests:
              *  Разместить -> проверить размещение

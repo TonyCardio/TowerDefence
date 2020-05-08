@@ -1,6 +1,6 @@
 ﻿namespace TowerDefence.Domain
 {
-    public enum FieldCell
+    public enum CellType
     {
         Empty = 0,
         EnemySpawn = 1,

@@ -20,17 +20,6 @@ namespace TowerDefence
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());
         }
-
-        /*
-         * TODO
-         *  
-         *  
-         * 
-         * 
-         */
-
-
-
         /*
          * # Сценарии
          * 

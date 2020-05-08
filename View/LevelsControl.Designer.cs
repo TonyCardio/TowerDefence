@@ -45,9 +45,9 @@ namespace TowerDefence.View
             // 
             this.flowLayoutPanel.AutoScroll = true;
             this.flowLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.flowLayoutPanel.Location = new System.Drawing.Point(193, 199);
+            this.flowLayoutPanel.Location = new System.Drawing.Point(193, 49);
             this.flowLayoutPanel.Name = "flowLayoutPanel";
-            this.flowLayoutPanel.Size = new System.Drawing.Size(794, 294);
+            this.flowLayoutPanel.Size = new System.Drawing.Size(794, 594);
             this.flowLayoutPanel.TabIndex = 0;
             // 
             // tableLayoutPanel
@@ -62,7 +62,7 @@ namespace TowerDefence.View
             this.tableLayoutPanel.Name = "tableLayoutPanel";
             this.tableLayoutPanel.RowCount = 3;
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 300F));
+            this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 600F));
             this.tableLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel.Size = new System.Drawing.Size(1181, 692);
             this.tableLayoutPanel.TabIndex = 0;
@@ -71,7 +71,7 @@ namespace TowerDefence.View
             // 
             this.Controls.Add(this.tableLayoutPanel);
             this.Name = "LevelsControl";
-            this.Size = new System.Drawing.Size(1181, 692);
+            this.Size = new System.Drawing.Size(1920, 1080);
             this.tableLayoutPanel.ResumeLayout(false);
             this.ResumeLayout(false);
 

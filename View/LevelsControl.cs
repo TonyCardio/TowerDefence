@@ -34,7 +34,7 @@ namespace TowerDefence.View
         private void ChoseLevel_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
-            game.StartLevel(button.Text);
+            game.ChoseLevel(button.Text);
         }
     }
 }

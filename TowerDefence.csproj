@@ -63,11 +63,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Domain\Castle.cs" />
+    <Compile Include="Domain\Cell.cs" />
     <Compile Include="Domain\Direction.cs" />
     <Compile Include="Domain\Enemy.cs" />
     <Compile Include="Domain\Extensions.cs" />
     <Compile Include="Domain\Field.cs" />
-    <Compile Include="Domain\FieldCell.cs" />
+    <Compile Include="Domain\CellType.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameStage.cs" />
     <Compile Include="Domain\GreenMonster.cs" />
@@ -148,7 +149,7 @@
     <Content Include="Levels\Second.txt" />
     <Content Include="Levels\Third.txt" />
     <Content Include="Resourses\Sprites\HighSkeletonAndGreenMonster.png" />
-    <Content Include="Resourses\Sprites\SmaleSkeleton.png" />
+    <Content Include="Resourses\Sprites\SmallSkeleton.png" />
     <None Include="Resourses\MainMenu.jpg" />
   </ItemGroup>
   <ItemGroup />
