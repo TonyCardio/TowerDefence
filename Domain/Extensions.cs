@@ -21,7 +21,7 @@ namespace TowerDefence.Domain
                 foreach (var nextPoint in MakeIncedentCells(field, path.Value))
                 {
                     if (visited.Contains(nextPoint) ||
-                        field.Cells[nextPoint.X, nextPoint.Y] == FieldCell.Empty) continue;
+                        field.Cells[nextPoint.X, nextPoint.Y] == Cell.Empty) continue;
                     var extendedPath = new SinglyLinkedList<Point>(nextPoint, path);
                     if (end.Equals(nextPoint))
                     {

@@ -30,7 +30,7 @@ namespace TowerDefence.Domain
             var map = mapWaves[0].Split(new[] { "\r", "\n" }, StringSplitOptions.RemoveEmptyEntries);
             var height = map.Length;
             var width = map.Any() ? map[0].Length : 0;
-            var cells = new FieldCell[width, height];
+            var cells = new Cell[width, height];
             var castlePos = new HashSet<Point>();
             var spawnPos = new HashSet<Point>();
             try
@@ -39,10 +39,10 @@ namespace TowerDefence.Domain
                     for (var x = 0; x < width; x++)
                     //Если будут траблы с координатами, то они здесь))
                     {
-                        var cell = (FieldCell)int.Parse(map[y][x].ToString());
-                        if (cell == FieldCell.Castle) castlePos.Add(new Point(x, y));
-                        if (cell == FieldCell.EnemySpawn) spawnPos.Add(new Point(x, y));
-                        cells[x, y] = cell;
+                        var type = (CellType)int.Parse(map[y][x].ToString());
+                        if (type == CellType.Castle) castlePos.Add(new Point(x, y));
+                        if (type == CellType.EnemySpawn) spawnPos.Add(new Point(x, y));
+                        cells[x, y] = new Cell(type, new Point(x, y));
                     }
             }
             catch (Exception e)
