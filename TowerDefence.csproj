@@ -64,6 +64,7 @@
   <ItemGroup>
     <Compile Include="Domain\Castle.cs" />
     <Compile Include="Domain\Cell.cs" />
+    <Compile Include="Domain\MovingCommand.cs" />
     <Compile Include="Domain\Direction.cs" />
     <Compile Include="Domain\Enemy.cs" />
     <Compile Include="Domain\Extensions.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Domain\GreenMonster.cs" />
     <Compile Include="Domain\HighSkeleton.cs" />
     <Compile Include="Domain\HorizontalTurret.cs" />
+    <Compile Include="Domain\ICreature.cs" />
     <Compile Include="Domain\IEnemy.cs" />
     <Compile Include="Domain\ITurret.cs" />
     <Compile Include="Domain\Level.cs" />
