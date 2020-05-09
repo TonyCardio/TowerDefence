@@ -33,8 +33,8 @@ namespace TowerDefence.View
                 case GameStage.ChoosingLevel:
                     ShowScreen(levelsControl);
                     break;
-                case GameStage.RunningLevel:
-                    ShowLevelScreen();
+                case GameStage.LevelNotStarted:
+                    ShowScreen(fieldControl);
                     break;
                 case GameStage.Finished:
                     ShowFinishedScreen();

@@ -67,5 +67,6 @@
 
         private MainMenuControl mainMenuControl;
         private LevelsControl levelsControl;
+        private FieldControl fieldControl;
     }
 }
