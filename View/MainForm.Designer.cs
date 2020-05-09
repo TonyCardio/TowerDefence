@@ -30,6 +30,7 @@
         {
             this.mainMenuControl = new MainMenuControl(game);
             this.levelsControl = new LevelsControl(game);
+            this.fieldControl = new FieldControl(game);
             this.SuspendLayout();
             // 
             // mainMenuControl
