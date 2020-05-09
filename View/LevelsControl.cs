@@ -36,5 +36,10 @@ namespace TowerDefence.View
             var button = sender as Button;
             game.ChoseLevel(button.Text);
         }
+
+        private void tableLayoutPanel_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }
