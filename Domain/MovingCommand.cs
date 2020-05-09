@@ -4,8 +4,8 @@
     {
         public int DeltaX;
         public int DeltaY;
-        Direction direction;
-        double angle;
+        public Direction direction;
+        public double angle;
     }
 
 }
