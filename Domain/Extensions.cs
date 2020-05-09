@@ -33,7 +33,6 @@ namespace TowerDefence.Domain
                     queue.Enqueue(extendedPath);
                 }
             }
-
             return resultPath ?? null;
         }
 

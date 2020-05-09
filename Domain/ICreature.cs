@@ -6,7 +6,11 @@ namespace TowerDefence.Domain
     {
         MovingCommand Act(int x, int y);
         Action ActionInConflict(ICreature conflictedObject);
-        // Dispose для пули DecreaseHealth для Enemy
+        /* 
+         * Destroy для пули если conflictedObject - Enemy
+         * DecreaseHealth для Enemy если conflictedObject - пуля
+         * DecreaseHealth для Castle если conflictedObject - Enemy(использовать Enemy.PunchPower)
+        */
     }
 
 }

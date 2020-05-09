@@ -12,7 +12,6 @@ namespace TowerDefence.Domain
         public int Width { get { return Cells.GetLength(0); } }
         public int Height { get { return Cells.GetLength(1); } }
         public Castle Castle { get; set; }
-        private readonly HashSet<ITurret> turrets = new HashSet<ITurret>();
 
         public Field(Cell[,] cells, Point castlePosition, Point enemySpawnPosition)
         {
@@ -21,16 +20,20 @@ namespace TowerDefence.Domain
             EnemySpawnPos = enemySpawnPosition;
         }
 
-        public IReadOnlyList<ITurret> GetTurrets()
+        public bool PutTurret(Turret turret, Point point)
         {
-            throw new NotImplementedException();
-        }
-
-        public bool PutTurret(ITurret turret, Point point)
-        {
-            if (Cells[point.X, point.Y]?.IsTurret == null)
+            if (point.X < 0 && point.X >= Width &&
+                point.Y < 0 && point.Y >= Height)
+                throw new ArgumentException();
+            if (Cells[point.X, point.Y]?.Creature as Turret != null)
+                // Мб вернуть false если захотим реализовать подсвечивание красненьким
                 throw new InvalidOperationException();
-            return true;
+            if (Cells[point.X, point.Y].Type == CellType.Empty)
+            {
+                Cells[point.X, point.Y] = new Cell(CellType.Empty, point, turret);
+                return true;
+            }
+            return false;
             /*
              * Tests:
              *  Разместить -> проверить размещение
@@ -38,7 +41,6 @@ namespace TowerDefence.Domain
              *  Размещение на дороге
              *  Размещение размещённой турели в допустимую позицию
              *  Размещение размещённой турели в недопустимую позицию
-             *  
              */
         }
     }

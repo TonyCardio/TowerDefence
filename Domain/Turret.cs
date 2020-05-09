@@ -1,6 +1,8 @@
-﻿namespace TowerDefence.Domain
+﻿using System;
+
+namespace TowerDefence.Domain
 {
-    public class Turret : ITurret
+    public class Turret : ITurret, ICreature
     {
         // положение на поле x y  -необязательное-
         public int Cost { get; set; }
@@ -14,6 +16,16 @@
             ShotPower = shotPower;
             CoolDown = coolDown;
             ShotsBeforCoolDown = shotsBeforCoolDown;
+        }
+
+        public MovingCommand Act(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Action ActionInConflict(ICreature conflictedObject)
+        {
+            throw new NotImplementedException();
         }
         // цена
         // урон
