@@ -50,6 +50,17 @@
             this.levelsControl.Name = "levelsControl";
             this.levelsControl.Size = new System.Drawing.Size(800, 600);
             this.levelsControl.TabIndex = 1;
+            //
+            // fieldControl
+            //
+            this.fieldControl.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.fieldControl.Location = new System.Drawing.Point(0, 0);
+            this.fieldControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.fieldControl.Name = "fieldControl";
+            //this.fieldControl.Size = new System.Drawing.Size(game.CurrentLevel.Field.Width * 32,
+            //    game.CurrentLevel.Field.Height * 32);
+            this.fieldControl.Size = new System.Drawing.Size(800, 600);
+            this.fieldControl.TabIndex = 2;
             // 
             // MainForm
             // 
@@ -58,6 +69,7 @@
             this.ClientSize = new System.Drawing.Size(1920, 1080);
             this.Controls.Add(this.mainMenuControl);
             this.Controls.Add(this.levelsControl);
+            this.Controls.Add(this.fieldControl);
             this.Name = "MainForm";
             this.Text = "TowerDefence";
             this.ResumeLayout(false);
