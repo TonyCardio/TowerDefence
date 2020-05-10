@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Threading;
+using System.Windows.Forms;
 
 namespace TowerDefence.Domain
 {
@@ -12,24 +12,24 @@ namespace TowerDefence.Domain
         public Field Field { get; set; }
         public List<Point> PathSpawnToCastle { get; set; }
         public int WavesCount { get; set; }
-        public int EnemiesPerWaveCount { get; set; }
-        public bool IsWave { get; set; }
-        private readonly HashSet<Enemy> enemies = new HashSet<Enemy>();
-        private System.Timers.Timer waveTimer = new System.Timers.Timer();
+        public int EnemiesPerWave { get; set; }
+        private Timer waveTimer = new Timer();
+        private Timer spawnTimer = new Timer();
+        private int enemiesLeftToSpawn;
 
         public event Action EnemyWave;
 
         public Level(string name, Field field, List<Point> pathToCastle, int wavesCount)
         {
-            // Добавить в Levels, LevelsLoader и этот конструктор
-            EnemiesPerWaveCount = 9;
             Name = name;
             Field = field;
-            WavesCount = wavesCount;
             PathSpawnToCastle = pathToCastle;
+            WavesCount = wavesCount;
+            EnemiesPerWave = 9; // Добавить в Levels, LevelsLoader и этот конструктор
             waveTimer.Interval = 20000;
-            waveTimer.Elapsed += OnWaveStart;
-            waveTimer.AutoReset = true;
+            spawnTimer.Interval = 500;
+            waveTimer.Tick += OnWaveStart;
+            spawnTimer.Tick += OnSpawn;
         }
 
         public void Run()
@@ -37,35 +37,36 @@ namespace TowerDefence.Domain
             waveTimer.Start();
         }
 
-        private void OnWaveStart(object sender, System.Timers.ElapsedEventArgs e)
+        private void OnWaveStart(object sender, EventArgs e)
         {
-            CrateEnemies();
             if (WavesCount <= 0)
             {
                 waveTimer.Stop();
+                spawnTimer.Dispose();
                 waveTimer.Dispose();
+            }
+            else
+            {
+                enemiesLeftToSpawn = EnemiesPerWave;
+                spawnTimer.Start();
             }
         }
 
-        private void MoveEnemies()
+        private void OnSpawn(object sender, EventArgs e)
         {
-            foreach (var enemy in enemies)
-                enemy.MakeStep();
-        }
-
-        private void CrateEnemies()
-        {
-            for (var i = 0; i < EnemiesPerWaveCount; i++)
-            {
-                var enemy = i >= EnemiesPerWaveCount / 3 ?
-                            i >= 2 * (EnemiesPerWaveCount / 3) ?
+            var enemy = enemiesLeftToSpawn < 2 * (EnemiesPerWave / 3) ?
+                            enemiesLeftToSpawn < EnemiesPerWave / 3 ?
                             (Enemy)new HighSkeleton(PathSpawnToCastle) :
                             (Enemy)new ShortSkeleton(PathSpawnToCastle) :
                         (Enemy)new GreenMonster(PathSpawnToCastle);
-                MoveEnemies();
+            var spawn = Field.EnemySpawnPos;
+            Field.Cells[spawn.X, spawn.Y].Creature = enemy;
+            enemiesLeftToSpawn--;
+            if (enemiesLeftToSpawn <= 0)
+            {
+                WavesCount--;
+                spawnTimer.Stop();
             }
-            WavesCount--;
-            EnemyWave?.Invoke();
         }
     }
 }
