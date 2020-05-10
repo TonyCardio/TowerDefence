@@ -9,7 +9,7 @@ namespace TowerDefence.Domain
         public Direction Direction;
         public Point CurrentPosition;
     }
-    public class Enemy : IEnemy
+    public class Enemy : IEnemy, ICreature
     {
         public delegate void PositionChangingHandler(PositionChangingArgs args);
         public event PositionChangingHandler PositionChanging;
@@ -78,7 +78,7 @@ namespace TowerDefence.Domain
                 OnPathSpawnToCastlePassed(); //The enemy came to the castle
                 return;
             }
-            var deltaPoint = new PointF(PathSpawnToCastle[currentIndexOfPath].X - Position.X, 
+            var deltaPoint = new PointF(PathSpawnToCastle[currentIndexOfPath].X - Position.X,
                 PathSpawnToCastle[currentIndexOfPath].Y - Position.Y);
             if (deltaPoint.X == 1) direction = Direction.Right;
             if (deltaPoint.X == -1) direction = Direction.Left;
@@ -86,6 +86,16 @@ namespace TowerDefence.Domain
             if (deltaPoint.Y == -1) direction = Direction.Down;
             OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
             Position = PathSpawnToCastle[currentIndexOfPath];
+        }
+
+        public MovingCommand Act(int x, int y)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Action ActionInConflict(ICreature conflictedObject)
+        {
+            throw new NotImplementedException();
         }
 
         /*
