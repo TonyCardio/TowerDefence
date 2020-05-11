@@ -31,10 +31,10 @@ namespace TowerDefence.View
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
-            var imagesDirectory = new DirectoryInfo(@"Resourses\Sprites");
-            var f = imagesDirectory.GetFiles("*.png");
-            var img = Image.FromFile(f[0].FullName);
-            e.Graphics.DrawImage((Bitmap)img, new Point(10, 10));
+            var path = Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
+               @"Resourses\Sprites\HighSkeletonAndGreenMonster.png");
+            var img = new Bitmap(path);
+            e.Graphics.DrawImage(img, new Point(10, 10));
         }
 
         private void TimerEvent(object sender, EventArgs args)

@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace TowerDefence.View
 {
-    class Sprite
+    public class Sprite
     {
         public Bitmap TextureInRect { get; private set; }
         public Point Position { get; private set; }
