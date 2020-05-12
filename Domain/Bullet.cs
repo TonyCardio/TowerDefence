@@ -9,7 +9,7 @@ namespace TowerDefence.Domain
 {
     public class Bullet : ICreature
     {
-        public int Damage { get; } = 5; 
+        public static int Damage { get; } = 5; 
         public Direction ShotDirection { get; set; }
         public Bullet(Direction direction)
         {
