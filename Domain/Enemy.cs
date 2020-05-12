@@ -84,8 +84,8 @@ namespace TowerDefence.Domain
                 OnPathSpawnToCastlePassed(); //The enemy came to the castle
                 return new MovingCommand() { direction = direction, DeltaX = 0, DeltaY = 0 };
             }
-            var deltaPoint = new Point(PathSpawnToCastle[currentIndexOfPath].X - Position.X,
-                PathSpawnToCastle[currentIndexOfPath].Y - Position.Y);
+            var deltaPoint = new Point(PathSpawnToCastle[currentIndexOfPath].X - x,
+                PathSpawnToCastle[currentIndexOfPath].Y - y);
             if (deltaPoint.X == 1) direction = Direction.Right;
             if (deltaPoint.X == -1) direction = Direction.Left;
             if (deltaPoint.Y == 1) direction = Direction.Up;
