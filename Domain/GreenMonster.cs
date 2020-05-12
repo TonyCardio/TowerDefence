@@ -9,18 +9,12 @@ namespace TowerDefence.Domain
 {
    public class GreenMonster : Enemy
     {
-        public GreenMonster(List<Point> pathSpawnToCastle) : base(pathSpawnToCastle, 20 , 5, 2, 3, 3, 3, 3, 6 , 8) { }
+        public GreenMonster(List<Point> pathSpawnToCastle) : base(pathSpawnToCastle, 20 , 5, 2) { }
 
         /*
          health - 20
          punchPower - 5
          speed - 2
-         countMoveLeftFrames - 3
-         countMoveRightFrames - 3
-         countMoveUpFrames - 3
-         countMoveDownFrames - 3
-         width - I don`t know - вставил рандомно
-         height - I don`t know - вставил рандомно
         */
 
     }
