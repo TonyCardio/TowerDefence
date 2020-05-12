@@ -62,6 +62,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Bullet.cs" />
     <Compile Include="Domain\Castle.cs" />
     <Compile Include="Domain\Cell.cs" />
     <Compile Include="Domain\FieldState.cs" />

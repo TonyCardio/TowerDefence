@@ -78,7 +78,7 @@ namespace TowerDefence.Domain
                 OnPathSpawnToCastlePassed(); //The enemy came to the castle
                 return;
             }
-            var deltaPoint = new PointF(PathSpawnToCastle[currentIndexOfPath].X - Position.X,
+            var deltaPoint = new Point(PathSpawnToCastle[currentIndexOfPath].X - Position.X,
                 PathSpawnToCastle[currentIndexOfPath].Y - Position.Y);
             if (deltaPoint.X == 1) direction = Direction.Right;
             if (deltaPoint.X == -1) direction = Direction.Left;
@@ -90,7 +90,29 @@ namespace TowerDefence.Domain
 
         public MovingCommand Act(int x, int y)
         {
-            throw new NotImplementedException();
+            Direction direction = Direction.Stay;
+            if (!IsAtCastle())
+                currentIndexOfPath++;
+            else
+            {
+                OnPathSpawnToCastlePassed(); //The enemy came to the castle
+                return new MovingCommand() {direction = direction, angle=0, DeltaX=0, DeltaY = 0 };
+            }
+            var deltaPoint = new Point(PathSpawnToCastle[currentIndexOfPath].X - Position.X,
+                PathSpawnToCastle[currentIndexOfPath].Y - Position.Y);
+            if (deltaPoint.X == 1) direction = Direction.Right;
+            if (deltaPoint.X == -1) direction = Direction.Left;
+            if (deltaPoint.Y == 1) direction = Direction.Up;
+            if (deltaPoint.Y == -1) direction = Direction.Down;
+           // OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
+            Position = PathSpawnToCastle[currentIndexOfPath];
+            return new MovingCommand
+            {
+                direction = direction,
+                angle = 0,
+                DeltaX = deltaPoint.X,
+                DeltaY = deltaPoint.Y
+            };
         }
 
         public Action ActionInConflict(ICreature conflictedObject)
