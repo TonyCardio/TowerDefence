@@ -42,6 +42,7 @@ namespace TowerDefence.Domain
         {
             if (path is null || path.Count < 1)
                 throw new Exception("Incorrect path from spawn to castle");
+
             PathSpawnToCastle = path;
             Position = path[0];
             Health = health;
@@ -53,6 +54,26 @@ namespace TowerDefence.Domain
 
         public bool IsAtCastle() => (currentIndexOfPath == PathSpawnToCastle.Count - 1);
 
+        public void MakeStep()
+        {
+            Direction direction = Direction.Stay;
+            if (!IsAtCastle())
+                currentIndexOfPath++;
+            else
+            {
+                OnPathSpawnToCastlePassed(); //The enemy came to the castle
+                return;
+            }
+            var deltaPoint = new Point(PathSpawnToCastle[currentIndexOfPath].X - Position.X,
+                PathSpawnToCastle[currentIndexOfPath].Y - Position.Y);
+            if (deltaPoint.X == 1) direction = Direction.Right;
+            if (deltaPoint.X == -1) direction = Direction.Left;
+            if (deltaPoint.Y == 1) direction = Direction.Up;
+            if (deltaPoint.Y == -1) direction = Direction.Down;
+            OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
+            Position = PathSpawnToCastle[currentIndexOfPath];
+        }
+
         public MovingCommand Act(int x, int y)
         {
             Direction direction = Direction.Stay;
@@ -63,7 +84,7 @@ namespace TowerDefence.Domain
                 OnPathSpawnToCastlePassed(); //The enemy came to the castle
                 return new MovingCommand() { direction = direction, DeltaX = 0, DeltaY = 0 };
             }
-            var deltaPoint = new Point(PathSpawnToCastle[PathSpawnToCastle.Count - currentIndexOfPath].X - x,
+            var deltaPoint = new Point(PathSpawnToCastle[PathSpawnToCastle.Count-currentIndexOfPath].X - x,
                 PathSpawnToCastle[PathSpawnToCastle.Count - currentIndexOfPath].Y - y);
             if (deltaPoint.X == 1) direction = Direction.Right;
             if (deltaPoint.X == -1) direction = Direction.Left;

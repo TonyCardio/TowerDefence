@@ -30,13 +30,18 @@ namespace TowerDefence.View
             Frame = frame;
             SetSprite();
             SetHitBox(location);
-            LocationOnControl = new Point(location.X * Sprite.SpriteSize.Width,
-                location.Y * Sprite.SpriteSize.Height - Sprite.SpriteSize.Height);
+            //LocationOnControl = new Point(location.X * Sprite.SpriteSize.Width + Sprite.SpriteSize.Width,
+            //    location.Y * Sprite.SpriteSize.Height - Sprite.SpriteSize.Height);
+            LocationOnControl = new Point(location.X * 32, location.Y * 32 - Sprite.SpriteSize.Height/2);
         }
         public void ChangeControlLoc()
         {
-            var x = LocationOnControl.X + Command.DeltaX * (Sprite.SpriteSize.Width / 4);
+            var x = LocationOnControl.X + Command.DeltaX * (Sprite.SpriteSize.Width / 6);
             var y = LocationOnControl.Y + Command.DeltaY * (Sprite.SpriteSize.Height / 4);
+            var rect = Sprite.SpriteSize;
+            Frame = Frame < 3 ? Frame : 0;
+            var newRect = new Rectangle(rect.X + 30 * Frame, rect.Y, rect.Width, rect.Height);
+            Sprite.SetTextureRect(newRect);
             LocationOnControl = new Point(x, y);
         }
         public Animation(CellType type, Point location)
@@ -77,12 +82,12 @@ namespace TowerDefence.View
             if (Creature is ShortSkeleton)
             {
                 Sprite = new Sprite(img,rect);
-                Sprite.SetPosition(new Point(0, 0));
+                Sprite.SetPosition(new Point(5, 150));
             }
             else if (Creature is GreenMonster)
             {
                 Sprite = new Sprite(img,rect);
-                Sprite.SetPosition(new Point(0, 0));
+                Sprite.SetPosition(new Point(5, 150));
             }
             else
             {
