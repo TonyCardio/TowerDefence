@@ -34,6 +34,9 @@ namespace TowerDefence.View
                 case GameStage.LevelNotStarted:
                     ShowScreen(fieldControl);
                     break;
+                case GameStage.RunningLevel:
+                    ShowScreen(fieldControl);
+                    break;
                 case GameStage.Finished:
                     ShowFinishedScreen();
                     break;
