@@ -14,6 +14,11 @@ namespace TowerDefence.View
         public Rectangle SpriteSize { get; private set; }
         Bitmap texture;
 
+        public Sprite(Bitmap texture, Rectangle rectangle)
+        {
+            SetTexture(texture);
+            SetTextureRect(rectangle);
+        }
         //Тут хз, может бытть лучше будет путь до текстуры передавать
         public void SetTexture(Bitmap texture)
         {

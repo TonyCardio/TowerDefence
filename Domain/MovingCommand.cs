@@ -5,7 +5,6 @@
         public int DeltaX;
         public int DeltaY;
         public Direction direction;
-        public double angle;
     }
 
 }

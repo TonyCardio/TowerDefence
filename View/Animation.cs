@@ -14,7 +14,8 @@ namespace TowerDefence.View
         public Sprite Sprite;
         public ICreature Creature;
         public MovingCommand Command;
-        public Point LocationOnMap;
+        public Point LocationOnControl;
+        public Point LocationOnField;
         public Point TargetLocation;
         public Rectangle HitBox;
         public const int  BulletSize = 32;
@@ -24,13 +25,35 @@ namespace TowerDefence.View
         {
             Creature = creature;
             Command = command;
+            LocationOnField = location;
             TargetLocation = new Point(location.X + command.DeltaX, location.Y + command.DeltaY);
             Frame = frame;
             SetSprite();
             SetHitBox(location);
-            LocationOnMap = new Point(location.X * Sprite.SpriteSize.Left,
+            LocationOnControl = new Point(location.X * Sprite.SpriteSize.Width,
                 location.Y * Sprite.SpriteSize.Height);
-
+        }
+        public void ChangeControlLoc()
+        {
+            var x = LocationOnControl.X + Command.DeltaX * (Sprite.SpriteSize.Width / 4);
+            var y = LocationOnControl.Y + Command.DeltaY * (Sprite.SpriteSize.Height / 4);
+            LocationOnControl = new Point(x, y);
+        }
+        public Animation(CellType type, Point location)
+        {
+            SetFieldElement(type, location);
+        }
+        public void SetFieldElement(CellType type, Point location)
+        {
+            var rect = new Rectangle(0, 0, 32, 32);
+            Bitmap bitmap = null;
+            if (type == CellType.Empty)
+                bitmap = new Bitmap(GetPath("Empty.png"));
+            else if (type == CellType.Road)
+                bitmap = new Bitmap(GetPath("Road.png"));
+            Sprite = new Sprite(bitmap,rect);
+            LocationOnControl = new Point(location.X * 32, location.Y * 32);
+            LocationOnField = location;
         }
 
         public void SetHitBox(Point location)
@@ -39,28 +62,27 @@ namespace TowerDefence.View
                location.X + Sprite.SpriteSize.Width / BulletSize,
                location.Y + Sprite.SpriteSize.Height / BulletSize);
         }
-
+        string GetPath(string fileName)
+        {
+            return Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
+                "Resourses\\Sprites\\" + fileName);
+        }
         public void SetSprite()
         {
             ///Пока не придумал как хранить точки для начала анимаций 
             ///Поэтому только наброски
-            var path = Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
-                @"Resourses\Sprites\HighSkeletonAndGreenMonster.png");
+            var path = GetPath("HighSkeletonAndGreenMonster.png");
             var img = new Bitmap(path);
-            var rect = new Rectangle(0, 0, 30, 30);
+            var rect = new Rectangle(5, 150, 25, 45);
             if (Creature is ShortSkeleton)
             {
-                Sprite = new Sprite();
+                Sprite = new Sprite(img,rect);
                 Sprite.SetPosition(new Point(0, 0));
-                Sprite.SetTexture((Bitmap)img);
-                Sprite.SetTextureRect(rect);
             }
             else if (Creature is GreenMonster)
             {
-                Sprite = new Sprite();
+                Sprite = new Sprite(img,rect);
                 Sprite.SetPosition(new Point(0, 0));
-                Sprite.SetTexture((Bitmap)img);
-                Sprite.SetTextureRect(rect);
             }
             //....
                 
