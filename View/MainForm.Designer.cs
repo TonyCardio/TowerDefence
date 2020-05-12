@@ -48,7 +48,7 @@
             this.mainMenuControl.Location = new System.Drawing.Point(0, 0);
             this.mainMenuControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.mainMenuControl.Name = "levelsControl";
-            this.mainMenuControl.Size = new System.Drawing.Size(1920, 1050);
+            this.mainMenuControl.Size = new System.Drawing.Size(800, 600);
             this.mainMenuControl.TabIndex = 1;
             // 
             // fieldControl
@@ -57,7 +57,7 @@
             this.mainMenuControl.Location = new System.Drawing.Point(0, 0);
             this.mainMenuControl.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.mainMenuControl.Name = "fieldControl";
-            this.mainMenuControl.Size = new System.Drawing.Size(1920, 1050);
+            this.mainMenuControl.Size = new System.Drawing.Size(800, 600);
             this.mainMenuControl.TabIndex = 2;
             // 
             // MainForm

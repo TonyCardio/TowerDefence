@@ -26,7 +26,7 @@ namespace TowerDefence.Domain
             PathSpawnToCastle = pathToCastle;
             WavesCount = wavesCount;
             EnemiesPerWave = 9; // Добавить в Levels, LevelsLoader и этот конструктор
-            waveTimer.Interval = 20000;
+            waveTimer.Interval = 2000;
             spawnTimer.Interval = 500;
             waveTimer.Tick += OnWaveStart;
             spawnTimer.Tick += OnSpawn;

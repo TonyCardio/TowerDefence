@@ -31,7 +31,7 @@ namespace TowerDefence.View
             SetSprite();
             SetHitBox(location);
             LocationOnControl = new Point(location.X * Sprite.SpriteSize.Width,
-                location.Y * Sprite.SpriteSize.Height);
+                location.Y * Sprite.SpriteSize.Height - Sprite.SpriteSize.Height);
         }
         public void ChangeControlLoc()
         {
@@ -82,6 +82,11 @@ namespace TowerDefence.View
             else if (Creature is GreenMonster)
             {
                 Sprite = new Sprite(img,rect);
+                Sprite.SetPosition(new Point(0, 0));
+            }
+            else
+            {
+                Sprite = new Sprite(img, rect);
                 Sprite.SetPosition(new Point(0, 0));
             }
             //....

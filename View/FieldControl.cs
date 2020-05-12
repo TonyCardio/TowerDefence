@@ -76,6 +76,7 @@ namespace TowerDefence.View
                 currentLevel = Game.CurrentLevel;
                 fieldState = new FieldState(currentLevel.Field);
                 Game.RunLevel();
+                ClientSize = new Size(1000, 1000);
                 tmrSimGame.Start();
                 tmrCheckInitLevel.Stop();
             }
