@@ -25,9 +25,9 @@ namespace TowerDefence.Domain
             Field = field;
             PathSpawnToCastle = pathToCastle;
             WavesCount = wavesCount;
-            EnemiesPerWave = 9; // Добавить в Levels, LevelsLoader и этот конструктор
-            waveTimer.Interval = 2000;
-            spawnTimer.Interval = 500;
+            EnemiesPerWave = 5; // Добавить в Levels, LevelsLoader и этот конструктор
+            waveTimer.Interval = 20000;
+            spawnTimer.Interval = 1000;
             waveTimer.Tick += OnWaveStart;
             spawnTimer.Tick += OnSpawn;
         }
@@ -44,6 +44,7 @@ namespace TowerDefence.Domain
                 waveTimer.Stop();
                 spawnTimer.Dispose();
                 waveTimer.Dispose();
+            
             }
             else
             {
@@ -59,6 +60,7 @@ namespace TowerDefence.Domain
                             (Enemy)new HighSkeleton(PathSpawnToCastle) :
                             (Enemy)new ShortSkeleton(PathSpawnToCastle) :
                         (Enemy)new GreenMonster(PathSpawnToCastle);
+            //enemy = new GreenMonster(PathSpawnToCastle);
             var spawn = Field.EnemySpawnPos;
             Field.Cells[spawn.X, spawn.Y].Creature = enemy;
             enemiesLeftToSpawn--;

@@ -15,6 +15,7 @@ namespace TowerDefence.View
     {
         public MainForm()
         {
+            DoubleBuffered = true;
             InitializeComponent();
             Game.StateChanged += OnStageChanged;
 
@@ -38,8 +39,8 @@ namespace TowerDefence.View
                     ShowScreen(fieldControl);
                     break;
                 case GameStage.Finished:
-                    ShowFinishedScreen();
-                    break;
+                    throw new NotImplementedException();
+                    //break;
                 default:
                     ShowScreen(mainMenuControl);
                     break;
@@ -50,16 +51,6 @@ namespace TowerDefence.View
         {
             HideScreens();
             screen.Show();
-        }
-
-        private void ShowFinishedScreen()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void ShowLevelScreen()
-        {
-            throw new NotImplementedException();
         }
 
         private void HideScreens()
