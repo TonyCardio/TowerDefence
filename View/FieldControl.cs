@@ -32,6 +32,7 @@ namespace TowerDefence.View
             tmrCheckInitLevel.Interval = 3;
             tmrCheckInitLevel.Tick += CheckInitLevel;
             tmrCheckInitLevel.Start();
+            DoubleBuffered = true;
         }
 
         protected override void OnPaint(PaintEventArgs e)
@@ -43,7 +44,6 @@ namespace TowerDefence.View
             //e.Graphics.DrawImage(img, new Point(10, 10));
             if (fieldState != null)
                 DrawField(e);
-            DoubleBuffered = true;
         }
 
         private void DrawField(PaintEventArgs e)
