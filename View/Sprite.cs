@@ -17,6 +17,7 @@ namespace TowerDefence.View
         public Sprite(Bitmap texture, Rectangle rectangle)
         {
             SetTexture(texture);
+            SpriteSize = rectangle;
             SetTextureRect(rectangle);
         }
         //Тут хз, может бытть лучше будет путь до текстуры передавать
@@ -26,9 +27,9 @@ namespace TowerDefence.View
         }
         public void SetTextureRect(Rectangle rectangle)
         {
-            SpriteSize = rectangle;
             TextureInRect = texture.Clone(rectangle, texture.PixelFormat);
         }
+
         public void SetPosition(Point point)
         {
             Position = point;
