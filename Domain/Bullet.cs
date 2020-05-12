@@ -19,12 +19,12 @@ namespace TowerDefence.Domain
         
         public MovingCommand Act(int x, int y)
         {
-            throw new NotImplementedException();
             var offsetPoint = new Point();
             if (ShotDirection == Direction.Up) offsetPoint.Y = 1;
             if (ShotDirection == Direction.Down) offsetPoint.Y = -1;
             if (ShotDirection == Direction.Right) offsetPoint.X = 1;
             if (ShotDirection == Direction.Left) offsetPoint.X = -1;
+            return new MovingCommand();
         }
 
         public Action ActionInConflict(ICreature conflictedObject)

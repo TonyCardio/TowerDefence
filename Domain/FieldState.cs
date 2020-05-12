@@ -27,7 +27,7 @@ namespace TowerDefence.Domain
                     var cell = Field.Cells[x, y];
                     if (cell.Type == CellType.Empty || cell.Type == CellType.Road)
                         StaticObject.Add(new Animation(cell.Type, new Point(x, y)));
-                    var creature =  cell.Creature;
+                    var creature = cell.Creature;
                     if (creature == null) continue;
                     var command = creature.Act(x, y);
                     Animations.Add(new Animation(creature, command, new Point(x, y), 0));
@@ -37,8 +37,14 @@ namespace TowerDefence.Domain
         public void EndAct()
         {
             foreach (var animation in Animations)
+            {
                 SelectWinnerCandidatePerLocation(animation.TargetLocation.X,
                     animation.TargetLocation.Y);
+                var prevLoc = animation.LocationOnField;
+                var newLoc = animation.TargetLocation;
+                Field.Cells[prevLoc.X, prevLoc.Y] = new Cell(CellType.Road, prevLoc);
+                Field.Cells[newLoc.X, newLoc.Y] = new Cell(CellType.Road, newLoc, animation.Creature);
+            }
         }
 
         private  void SelectWinnerCandidatePerLocation(int x, int y)

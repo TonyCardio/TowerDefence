@@ -8,13 +8,10 @@ namespace TowerDefence.View
 {
     public partial class LevelsControl : UserControl
     {
-        private Game game;
-
-        public LevelsControl(Game game)
+        public LevelsControl()
         {
-            this.game = game;
             InitializeComponent();
-            foreach (var level in game.Levels)
+            foreach (var level in Game.Levels)
             {
                 var button = new Button();
                 button.Text = level.Name;
@@ -34,7 +31,7 @@ namespace TowerDefence.View
         private void ChoseLevel_Click(object sender, EventArgs e)
         {
             var button = sender as Button;
-            game.ChoseLevel(button.Text);
+            Game.ChoseLevel(button.Text);
         }
 
         private void tableLayoutPanel_Paint(object sender, PaintEventArgs e)

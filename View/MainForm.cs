@@ -13,12 +13,10 @@ namespace TowerDefence.View
 {
     public partial class MainForm : Form
     {
-        private Game game;
         public MainForm()
         {
-            game = new Game();
             InitializeComponent();
-            game.StateChanged += OnStageChanged;
+            Game.StateChanged += OnStageChanged;
 
             ShowScreen(mainMenuControl);
         }
