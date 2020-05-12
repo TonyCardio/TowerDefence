@@ -10,6 +10,7 @@ namespace TowerDefence.Domain
     {
         //public const int ElementSize = 32;
         public List<Animation> Animations = new List<Animation>();
+        public List<Animation> StaticObject = new List<Animation>();
         public Field Field;
 
         public FieldState(Field field)
@@ -19,10 +20,14 @@ namespace TowerDefence.Domain
         public void BeginAct()
         {
             Animations.Clear();
+            StaticObject.Clear();
             for (int x = 0; x < Field.Width; x++)
                 for (int y = 0; y < Field.Height; y++)
                 {
-                    var creature = Field.Cells[x, y].Creature;
+                    var cell = Field.Cells[x, y];
+                    if (cell.Type == CellType.Empty || cell.Type == CellType.Road)
+                        StaticObject.Add(new Animation(cell.Type, new Point(x, y)));
+                    var creature =  cell.Creature;
                     if (creature == null) continue;
                     var command = creature.Act(x, y);
                     Animations.Add(new Animation(creature, command, new Point(x, y), 0));
@@ -31,12 +36,19 @@ namespace TowerDefence.Domain
 
         public void EndAct()
         {
-            throw new NotImplementedException();
+            foreach (var animation in Animations)
+                SelectWinnerCandidatePerLocation(animation.TargetLocation.X,
+                    animation.TargetLocation.Y);
         }
 
-        private static ICreature SelectWinnerCandidatePerLocation(int x, int y)
+        private  void SelectWinnerCandidatePerLocation(int x, int y)
         {
-            throw new NotImplementedException();
+            var candidates = GetCandidatesPerLocation(x, y);
+            var alive = candidates.ToList();
+            foreach (var candidate in candidates)
+                foreach (var rival in alive)
+                    if (candidate != rival)
+                        candidate.ActionInConflict(rival)();
         }
 
         private List<ICreature> GetCandidatesPerLocation(int x, int y)
