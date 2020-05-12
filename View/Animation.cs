@@ -37,6 +37,9 @@ namespace TowerDefence.View
         {
             var x = LocationOnControl.X + Command.DeltaX * (Sprite.SpriteSize.Width / 4);
             var y = LocationOnControl.Y + Command.DeltaY * (Sprite.SpriteSize.Height / 4);
+            //var rect = Sprite.SpriteSize;
+            //var newRect = new Rectangle(rect.X + 30 * Frame, rect.Y, rect.Width, rect.Height);
+            //Sprite.SetTextureRect(newRect);
             LocationOnControl = new Point(x, y);
         }
         public Animation(CellType type, Point location)

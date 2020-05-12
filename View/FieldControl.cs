@@ -58,8 +58,8 @@ namespace TowerDefence.View
                 fieldState.BeginAct();
             foreach (var e in fieldState.Animations)
             {
-                e.ChangeControlLoc();
                 e.Frame = frames;
+                e.ChangeControlLoc();
             }
             if (frames == 4)
                 fieldState.EndAct();
