@@ -73,7 +73,7 @@ namespace TowerDefence.Tests
         public void EmemyIsLife_whenHeWasCreated()
         {
             enemy = new ShortSkeleton(CorrectPathSpawnToCastle);
-            enemy.IsLife().Should().BeTrue();
+            enemy.IsAlive().Should().BeTrue();
         }
 
         [Test]
@@ -85,7 +85,7 @@ namespace TowerDefence.Tests
             {
                 enemy.ActionInConflict(bullet)();
             }
-            enemy.IsLife().Should().BeFalse();
+            enemy.IsAlive().Should().BeFalse();
         }
     }
 }

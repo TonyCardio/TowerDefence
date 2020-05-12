@@ -6,7 +6,7 @@ namespace TowerDefence.Domain
     {
         public int Health { get; set; } = 100;
 
-        public MovingCommand Act(int x, int y) => null;
+        public MovingCommand Act(int x, int y) => new MovingCommand();
 
         public Action ActionInConflict(ICreature conflictedObject)
         {
@@ -17,6 +17,7 @@ namespace TowerDefence.Domain
             };
         }
 
-        public bool IsDestroyed() => Health <= 0;
+        public bool IsAlive() => Health > 0;
+
     }
 }

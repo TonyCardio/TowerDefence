@@ -10,7 +10,7 @@ namespace TowerDefence.Domain
     public class Bullet : ICreature
     {
         public static int Damage { get; } = 5;
-        public int Flight { get; set; }
+        public int CountFlightCompletedPossition { get; set; }
         public Direction ShotDirection { get; set; }
 
         public event Action DeleteBullet;
@@ -31,7 +31,7 @@ namespace TowerDefence.Domain
             var height = Game.CurrentLevel.Field.Height;
             var width = Game.CurrentLevel.Field.Width;
             var offsetPoint = new Point();
-            if (Flight < 5)
+            if (CountFlightCompletedPossition < 5)
             {
                 if (ShotDirection == Direction.Up)
                     if (y + 1 < height)
@@ -49,7 +49,7 @@ namespace TowerDefence.Domain
                         offsetPoint.X = 0;
                         OnDeleteBullet();
                     }
-                Flight++;
+                CountFlightCompletedPossition++;
             }
             else
                 OnDeleteBullet();
@@ -65,5 +65,7 @@ namespace TowerDefence.Domain
                     conflictedObject.ActionInConflict(this)();
             };
         }
+
+        public bool IsAlive() => true;
     }
 }

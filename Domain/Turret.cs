@@ -30,7 +30,9 @@ namespace TowerDefence.Domain
             return new MovingCommand();
         }
 
-        public Action ActionInConflict(ICreature conflictedObject) => null;
+        public Action ActionInConflict(ICreature conflictedObject){ return () => { }; }
+
+        public bool IsAlive() => true;
 
         // цена
         // урон

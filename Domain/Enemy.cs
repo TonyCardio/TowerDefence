@@ -28,6 +28,8 @@ namespace TowerDefence.Domain
        
         public int Health { get; set; }
 
+        public bool IsAlive() => Health > 0;
+
         public int PunchPower { get; set; }
 
         public int Speed { get; set; }
@@ -50,29 +52,7 @@ namespace TowerDefence.Domain
             Speed = speed;
         }
 
-        public bool IsLife() => Health > 0;
-
         public bool IsAtCastle() => (currentIndexOfPath == PathSpawnToCastle.Count - 1);
-
-        public void MakeStep()
-        {
-            Direction direction = Direction.Stay;
-            if (!IsAtCastle())
-                currentIndexOfPath++;
-            else
-            {
-                OnPathSpawnToCastlePassed(); //The enemy came to the castle
-                return;
-            }
-            var deltaPoint = new Point(PathSpawnToCastle[currentIndexOfPath].X - Position.X,
-                PathSpawnToCastle[currentIndexOfPath].Y - Position.Y);
-            if (deltaPoint.X == 1) direction = Direction.Right;
-            if (deltaPoint.X == -1) direction = Direction.Left;
-            if (deltaPoint.Y == 1) direction = Direction.Up;
-            if (deltaPoint.Y == -1) direction = Direction.Down;
-            OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
-            Position = PathSpawnToCastle[currentIndexOfPath];
-        }
 
         public MovingCommand Act(int x, int y)
         {
@@ -106,8 +86,6 @@ namespace TowerDefence.Domain
             {
                 Health -= (conflictedObject is Bullet) ? Bullet.Damage : 0;
             };
-        }
-
-
+        }        
     }
 }
