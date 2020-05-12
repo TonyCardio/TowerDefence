@@ -51,8 +51,8 @@ namespace TowerDefence.Tests
         public void MoveEnemyToCastle()
         {
             enemy = new GreenMonster(CorrectPathSpawnToCastle);
-            enemy.MakeStep();
-            enemy.MakeStep();
+            enemy.Act(0, 1);
+            enemy.Act(1, 1);
             enemy.IsAtCastle().Should().BeTrue();
             enemy.Position.Should().Be(new Point(1, 1));
         }
@@ -61,9 +61,9 @@ namespace TowerDefence.Tests
         public void TryMakeStep_WhenEnemyCameToCastle()
         {
             enemy = new GreenMonster(CorrectPathSpawnToCastle);
-            enemy.MakeStep();
-            enemy.MakeStep();
-            enemy.MakeStep();
+            enemy.Act(0, 1);
+            enemy.Act(1, 1);
+            enemy.Act(1, 2);
             enemy.IsAtCastle().Should().BeTrue();
             enemy.Position.Should().Be(new Point(1, 1));
 
@@ -74,6 +74,18 @@ namespace TowerDefence.Tests
         {
             enemy = new ShortSkeleton(CorrectPathSpawnToCastle);
             enemy.IsLife().Should().BeTrue();
+        }
+
+        [Test]
+        public void DealingDamageToDeath()
+        {
+            enemy = new GreenMonster(CorrectPathSpawnToCastle);
+            var bullet = new Bullet(Direction.Stay);
+            for(int i =0; i < 4 ; i++)
+            {
+                enemy.ActionInConflict(bullet)();
+            }
+            enemy.IsLife().Should().BeFalse();
         }
     }
 }

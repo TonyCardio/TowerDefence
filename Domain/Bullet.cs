@@ -9,8 +9,17 @@ namespace TowerDefence.Domain
 {
     public class Bullet : ICreature
     {
-        public static int Damage { get; } = 5; 
+        public static int Damage { get; } = 5;
+        public int Flight { get; set; }
         public Direction ShotDirection { get; set; }
+
+        public event Action DeleteBullet;
+
+        public void OnDeleteBullet()
+        {
+            if (DeleteBullet != null) DeleteBullet();
+        }
+
         public Bullet(Direction direction)
         {
             ShotDirection = direction;
@@ -19,17 +28,42 @@ namespace TowerDefence.Domain
         
         public MovingCommand Act(int x, int y)
         {
+            var height = Game.CurrentLevel.Field.Height;
+            var width = Game.CurrentLevel.Field.Width;
             var offsetPoint = new Point();
-            if (ShotDirection == Direction.Up) offsetPoint.Y = 1;
-            if (ShotDirection == Direction.Down) offsetPoint.Y = -1;
-            if (ShotDirection == Direction.Right) offsetPoint.X = 1;
-            if (ShotDirection == Direction.Left) offsetPoint.X = -1;
-            return new MovingCommand();
+            if (Flight < 5)
+            {
+                if (ShotDirection == Direction.Up)
+                    if (y + 1 < height)
+                        offsetPoint.Y = 1;
+                    else
+                    {
+                        offsetPoint.Y = 0;
+                        OnDeleteBullet();
+                    }
+                if (ShotDirection == Direction.Left)
+                    if (x > 0)
+                        offsetPoint.X = -1;
+                    else
+                    {
+                        offsetPoint.X = 0;
+                        OnDeleteBullet();
+                    }
+                Flight++;
+            }
+            else
+                OnDeleteBullet();
+          
+            return new MovingCommand() { DeltaX = offsetPoint.X, DeltaY = offsetPoint.Y, direction = ShotDirection};
         }
 
         public Action ActionInConflict(ICreature conflictedObject)
         {
-            throw new NotImplementedException();
+            return () =>
+            {
+                if (conflictedObject is Enemy)
+                    conflictedObject.ActionInConflict(this)();
+            };
         }
     }
 }

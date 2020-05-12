@@ -8,11 +8,12 @@ namespace TowerDefence.Domain
 {
    public class VerticalTurret : Turret
     {
-        public VerticalTurret() : base(50, 10, 10 ,5) { }
-        /*
-           cost - 50
-           shotPower - 10
-           coolDown - 10
-         */
+        public VerticalTurret() : base(50, 10, 10 ,5, Direction.Up) { }
+       
+           /*
+             cost - 50
+             shotPower - 10
+             coolDown - 10
+           */
     }
 }
