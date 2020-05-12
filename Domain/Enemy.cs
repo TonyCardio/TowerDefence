@@ -96,7 +96,7 @@ namespace TowerDefence.Domain
             else
             {
                 OnPathSpawnToCastlePassed(); //The enemy came to the castle
-                return new MovingCommand() {direction = direction, angle=0, DeltaX=0, DeltaY = 0 };
+                return new MovingCommand() { direction = direction, DeltaX = 0, DeltaY = 0 };
             }
             var deltaPoint = new Point(PathSpawnToCastle[currentIndexOfPath].X - Position.X,
                 PathSpawnToCastle[currentIndexOfPath].Y - Position.Y);
@@ -104,12 +104,11 @@ namespace TowerDefence.Domain
             if (deltaPoint.X == -1) direction = Direction.Left;
             if (deltaPoint.Y == 1) direction = Direction.Up;
             if (deltaPoint.Y == -1) direction = Direction.Down;
-           // OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
+            // OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
             Position = PathSpawnToCastle[currentIndexOfPath];
             return new MovingCommand
             {
                 direction = direction,
-                angle = 0,
                 DeltaX = deltaPoint.X,
                 DeltaY = deltaPoint.Y
             };

@@ -17,7 +17,7 @@ namespace TowerDefence.Domain
         private Timer spawnTimer = new Timer();
         private int enemiesLeftToSpawn;
 
-        public event Action EnemyWave;
+        //public event Action EnemyWave;
 
         public Level(string name, Field field, List<Point> pathToCastle, int wavesCount)
         {

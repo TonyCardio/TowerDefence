@@ -6,5 +6,4 @@
         public int DeltaY;
         public Direction direction;
     }
-
 }

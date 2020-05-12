@@ -15,18 +15,16 @@ namespace TowerDefence.View
 {
     public partial class FieldControl : UserControl
     {
-        private Game game;
         private Level currentLevel;
         private FieldState fieldState;
         int frames;
         Timer tmrSimGame = new Timer();
         Timer tmrCheckInitLevel = new Timer();
 
-        public FieldControl(Game game)
+        public FieldControl()
         {
             InitializeComponent();
-            this.game = game;
-            currentLevel = game.CurrentLevel;
+            currentLevel = Game.CurrentLevel;
             tmrSimGame.Interval = 20;
             tmrSimGame.Tick += TimerEvent;
             tmrCheckInitLevel.Interval = 3;
@@ -73,11 +71,11 @@ namespace TowerDefence.View
 
         private void CheckInitLevel(object sender, EventArgs args)
         {
-            if (game.CurrentLevel != null)
+            if (Game.CurrentLevel != null)
             {
-                currentLevel = game.CurrentLevel;
+                currentLevel = Game.CurrentLevel;
                 fieldState = new FieldState(currentLevel.Field);
-                game.RunLevel();
+                Game.RunLevel();
                 tmrSimGame.Start();
                 tmrCheckInitLevel.Stop();
             }

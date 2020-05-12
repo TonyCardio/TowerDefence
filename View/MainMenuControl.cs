@@ -6,11 +6,8 @@ namespace TowerDefence.View
 {
     public partial class MainMenuControl : UserControl
     {
-        private Game game;
-
-        public MainMenuControl(Game game)
+        public MainMenuControl()
         {
-            this.game = game;
             InitializeComponent();
             startButton.Click += BeginGame_Click;
         }
@@ -24,7 +21,7 @@ namespace TowerDefence.View
 
         private void BeginGame_Click(object sender, EventArgs e)
         {
-            game.StartChooseLevel();
+            Game.StartChooseLevel();
         }
     }
 }

@@ -7,26 +7,26 @@ using System.Threading.Tasks;
 
 namespace TowerDefence.Domain
 {
-    public class Game
+    public static class Game
     {
-        GameStage stage = GameStage.MainMenu;
-        public event Action<GameStage> StateChanged;
-        public Player Player { get; set; }
-        public List<Level> Levels { get; set; }
-        public Level CurrentLevel { get; private set; }
+        static GameStage stage = GameStage.MainMenu;
+        public static event Action<GameStage> StateChanged;
 
-        public Game()
+        public static List<Level> Levels { get; set; }
+        public static Level CurrentLevel { get; private set; } = null;
+
+        static Game()
         {
             Levels = LoadLevels();
         }
 
-        public void RunLevel()
+        public static void RunLevel()
         {
             CurrentLevel.Run();
             ChangeStage(GameStage.RunningLevel);
         }
 
-        private List<Level> LoadLevels()
+        private static List<Level> LoadLevels()
         {
             var levels = new List<Level>();
             foreach (var lvlName in LevelsLoader.GetLevelsNames())
@@ -34,12 +34,12 @@ namespace TowerDefence.Domain
             return levels;
         }
 
-        public void StartChooseLevel()
+        public static void StartChooseLevel()
         {
             ChangeStage(GameStage.ChoosingLevel);
         }
 
-        public void ChoseLevel(string levelName)
+        public static void ChoseLevel(string levelName)
         {
             CurrentLevel = Levels
                 .Where(lvl => lvl.Name == levelName)
@@ -47,9 +47,9 @@ namespace TowerDefence.Domain
             ChangeStage(GameStage.LevelNotStarted);
         }
 
-        private void ChangeStage(GameStage stage)
+        private static void ChangeStage(GameStage stage)
         {
-            this.stage = stage;
+            Game.stage = stage;
             StateChanged?.Invoke(stage);
         }
     }
