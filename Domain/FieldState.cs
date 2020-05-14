@@ -25,25 +25,28 @@ namespace TowerDefence.Domain
                 for (int y = 0; y < Field.Height; y++)
                 {
                     var cell = Field.Cells[x, y];
-                    if (cell.Type == CellType.Empty || cell.Type == CellType.Road)
+                    if (cell.Type == CellType.Empty || cell.Type == CellType.Road || cell.Type == CellType.EnemySpawn)
                         StaticObject.Add(new Animation(cell.Type, new Point(x, y)));
                     var creature = cell.Creature;
                     if (creature == null) continue;
                     var command = creature.Act(x, y);
-                    Animations.Add(new Animation(creature, command, new Point(x, y), 0));
+                    Animations.Add(new Animation(creature, command, new Point(x, y), 0,cell.Type));
                 }
         }
 
         public void EndAct()
         {
-            foreach (var animation in Animations)
+            var processedPoint = new HashSet<Point>();
+            foreach (var animation in Animations.Where(a => !processedPoint.Contains(a.TargetLocation)))
             {
                 SelectWinnerCandidatePerLocation(animation.TargetLocation.X,
                     animation.TargetLocation.Y);
                 var prevLoc = animation.LocationOnField;
                 var newLoc = animation.TargetLocation;
-                Field.Cells[prevLoc.X, prevLoc.Y] = new Cell(CellType.Road, prevLoc);
-                Field.Cells[newLoc.X, newLoc.Y] = new Cell(CellType.Road, newLoc, animation.Creature);
+                Field.Cells[prevLoc.X, prevLoc.Y] = new Cell(animation.CellType, prevLoc);
+                Field.Cells[newLoc.X, newLoc.Y] = new Cell(animation.CellType, newLoc, 
+                    animation.Creature.IsAlive()? animation.Creature: null);
+                processedPoint.Add(animation.TargetLocation);
             }
         }
 

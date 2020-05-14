@@ -17,12 +17,14 @@ namespace TowerDefence.View
         public Point LocationOnControl;
         public Point LocationOnField;
         public Point TargetLocation;
+        public CellType CellType;
         public Rectangle HitBox;
         public const int  BulletSize = 32;
         public int Frame;
 
-        public Animation(ICreature creature, MovingCommand command, Point location, int frame)
+        public Animation(ICreature creature, MovingCommand command, Point location, int frame, CellType type)
         {
+            this.CellType = type;
             Creature = creature;
             Command = command;
             LocationOnField = location;
@@ -34,8 +36,16 @@ namespace TowerDefence.View
             //    location.Y * Sprite.SpriteSize.Height - Sprite.SpriteSize.Height);
             LocationOnControl = new Point(location.X * 32, location.Y * 32 - Sprite.SpriteSize.Height/2);
         }
+
+        public Animation()
+        {
+
+        }
+
         public void ChangeControlLoc()
         {
+            if (Command.DeltaY == 0 && Command.DeltaX == 0)
+                return;
             var x = LocationOnControl.X + Command.DeltaX * (Sprite.SpriteSize.Width / 6);
             var y = LocationOnControl.Y + Command.DeltaY * (Sprite.SpriteSize.Height / 4);
             var rect = Sprite.SpriteSize;
@@ -44,21 +54,24 @@ namespace TowerDefence.View
             Sprite.SetTextureRect(newRect);
             LocationOnControl = new Point(x, y);
         }
+
         public Animation(CellType type, Point location)
         {
             SetFieldElement(type, location);
         }
+
         public void SetFieldElement(CellType type, Point location)
         {
             var rect = new Rectangle(0, 0, 32, 32);
             Bitmap bitmap = null;
             if (type == CellType.Empty)
                 bitmap = new Bitmap(GetPath("Empty.png"));
-            else if (type == CellType.Road)
+            else if (type == CellType.Road || type == CellType.EnemySpawn)
                 bitmap = new Bitmap(GetPath("Road.png"));
             Sprite = new Sprite(bitmap,rect);
             LocationOnControl = new Point(location.X * 32, location.Y * 32);
             LocationOnField = location;
+            CellType = type;
         }
 
         public void SetHitBox(Point location)
@@ -67,11 +80,13 @@ namespace TowerDefence.View
                location.X + Sprite.SpriteSize.Width / BulletSize,
                location.Y + Sprite.SpriteSize.Height / BulletSize);
         }
-        string GetPath(string fileName)
+
+        public string GetPath(string fileName)
         {
             return Path.Combine(new DirectoryInfo(Directory.GetCurrentDirectory()).Parent.Parent.FullName.ToString(),
                 "Resourses\\Sprites\\" + fileName);
         }
+
         public void SetSprite()
         {
             ///Пока не придумал как хранить точки для начала анимаций 
