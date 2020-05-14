@@ -8,8 +8,8 @@ namespace TowerDefence.Domain
         public Cell[,] Cells { get; set; }
         public Point CastlePos { get; set; }
         public Point EnemySpawnPos { get; set; }
-        public int Width { get { return Cells.GetLength(0); } }
-        public int Height { get { return Cells.GetLength(1); } }
+        public int Width { get => Cells.GetLength(0); }
+        public int Height { get => Cells.GetLength(1); }
         public Castle Castle { get; set; }
 
         public Field(Cell[,] cells, Point castlePosition, Point enemySpawnPosition)

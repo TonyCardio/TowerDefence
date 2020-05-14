@@ -10,7 +10,7 @@ namespace TowerDefence.Domain
 
         public int Health { get; set; }
 
-        public bool IsAlive() => Health > 0;
+        public bool IsAlive { get => Health > 0; set { } }
 
         public int PunchPower { get; set; }
 
@@ -44,6 +44,7 @@ namespace TowerDefence.Domain
             else
             {
                 //PathSpawnToCastlePassed?.Invoke(PunchPower);
+                Health = 0;
                 return new MovingCommand() { direction = direction, DeltaX = 0, DeltaY = 0 };
             }
             var deltaPoint = new Point(PathSpawnToCastle[PathSpawnToCastle.Count - currentIndexOfPath].X - x,

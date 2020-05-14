@@ -12,20 +12,15 @@ namespace TowerDefence.Domain
         public static int Damage { get; } = 5;
         public int CountFlightCompletedPossition { get; set; }
         public Direction ShotDirection { get; set; }
-
-        public event Action DeleteBullet;
-
-        public void OnDeleteBullet()
-        {
-            if (DeleteBullet != null) DeleteBullet();
-        }
+        public bool IsAlive { get; set; }
 
         public Bullet(Direction direction)
         {
             ShotDirection = direction;
         }
 
-        
+        private void Destroy() => IsAlive = false;
+
         public MovingCommand Act(int x, int y)
         {
             var height = Game.CurrentLevel.Field.Height;
@@ -39,7 +34,7 @@ namespace TowerDefence.Domain
                     else
                     {
                         offsetPoint.Y = 0;
-                        OnDeleteBullet();
+                        Destroy();
                     }
                 if (ShotDirection == Direction.Left)
                     if (x > 0)
@@ -47,14 +42,14 @@ namespace TowerDefence.Domain
                     else
                     {
                         offsetPoint.X = 0;
-                        OnDeleteBullet();
+                        Destroy();
                     }
                 CountFlightCompletedPossition++;
             }
             else
-                OnDeleteBullet();
-          
-            return new MovingCommand() { DeltaX = offsetPoint.X, DeltaY = offsetPoint.Y, direction = ShotDirection};
+                Destroy();
+
+            return new MovingCommand() { DeltaX = offsetPoint.X, DeltaY = offsetPoint.Y, direction = ShotDirection };
         }
 
         public Action ActionInConflict(ICreature conflictedObject)
@@ -62,10 +57,8 @@ namespace TowerDefence.Domain
             return () =>
             {
                 if (conflictedObject is Enemy)
-                    conflictedObject.ActionInConflict(this)();
+                    Destroy();
             };
         }
-
-        public bool IsAlive() => true;
     }
 }

@@ -44,7 +44,7 @@ namespace TowerDefence.Domain
                 waveTimer.Stop();
                 spawnTimer.Dispose();
                 waveTimer.Dispose();
-            
+
             }
             else
             {

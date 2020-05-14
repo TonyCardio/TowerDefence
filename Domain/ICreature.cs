@@ -6,7 +6,7 @@ namespace TowerDefence.Domain
     {
         MovingCommand Act(int x, int y);
         Action ActionInConflict(ICreature conflictedObject);
-        bool IsAlive();
+        bool IsAlive { get; set; }
         /* 
          * Destroy для пули если conflictedObject - Enemy
          * DecreaseHealth для Enemy если conflictedObject - пуля

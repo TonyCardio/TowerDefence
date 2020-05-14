@@ -10,6 +10,7 @@ namespace TowerDefence.Domain
         public int CoolDown { get; set; }
         public int ShotsBeforCoolDown { get; set; }
         public Direction TypeTurretInDirection { get; set; }
+        public bool IsAlive { get; set; } = true;
 
         public Turret(int cost, int shotPower, int shotsBeforCoolDown, int coolDown, Direction direction)
         {
@@ -30,9 +31,7 @@ namespace TowerDefence.Domain
             return new MovingCommand();
         }
 
-        public Action ActionInConflict(ICreature conflictedObject){ return () => { }; }
-
-        public bool IsAlive() => true;
+        public Action ActionInConflict(ICreature conflictedObject) { return () => { }; }
 
         // цена
         // урон

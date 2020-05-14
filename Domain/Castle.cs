@@ -5,7 +5,7 @@ namespace TowerDefence.Domain
     public class Castle : ICreature
     {
         public int Health { get; private set; }
-        public bool IsAlive() => Health > 0;
+        public bool IsAlive { get => Health > 0; set { } }
 
         public Castle()
         {
@@ -26,7 +26,7 @@ namespace TowerDefence.Domain
         private void GetDamageOrLoseLevel(int damage)
         {
             Health -= damage;
-            if (!IsAlive())
+            if (!IsAlive)
                 Game.LoseLevel();
         }
     }
