@@ -4,28 +4,10 @@ using System;
 
 namespace TowerDefence.Domain
 {
-    public class PositionChangingArgs : EventArgs
-    {
-        public Direction Direction;
-        public Point CurrentPosition;
-    }
     public class Enemy : IEnemy, ICreature
     {
-        public delegate void PositionChangingHandler(PositionChangingArgs args);
-        public event PositionChangingHandler PositionChanging;
-        public event Action PathSpawnToCastlePassed;
+        public static event Action<int> PathSpawnToCastlePassed;
 
-        public void OnPositionChanging(PositionChangingArgs args)
-        {
-            if (PositionChanging != null) PositionChanging(args);
-        }
-
-        public void OnPathSpawnToCastlePassed()
-        {
-            if (PathSpawnToCastlePassed != null)
-                PathSpawnToCastlePassed();
-        }
-       
         public int Health { get; set; }
 
         public bool IsAlive() => Health > 0;
@@ -61,16 +43,15 @@ namespace TowerDefence.Domain
                 currentIndexOfPath++;
             else
             {
-                OnPathSpawnToCastlePassed(); //The enemy came to the castle
+                //PathSpawnToCastlePassed?.Invoke(PunchPower);
                 return new MovingCommand() { direction = direction, DeltaX = 0, DeltaY = 0 };
             }
-            var deltaPoint = new Point(PathSpawnToCastle[PathSpawnToCastle.Count-currentIndexOfPath].X - x,
+            var deltaPoint = new Point(PathSpawnToCastle[PathSpawnToCastle.Count - currentIndexOfPath].X - x,
                 PathSpawnToCastle[PathSpawnToCastle.Count - currentIndexOfPath].Y - y);
             if (deltaPoint.X == 1) direction = Direction.Right;
             if (deltaPoint.X == -1) direction = Direction.Left;
             if (deltaPoint.Y == 1) direction = Direction.Up;
             if (deltaPoint.Y == -1) direction = Direction.Down;
-            // OnPositionChanging(new PositionChangingArgs { CurrentPosition = Position, Direction = direction }); //Happened event of move Enemy
             Position = PathSpawnToCastle[currentIndexOfPath];
             return new MovingCommand
             {
@@ -86,6 +67,6 @@ namespace TowerDefence.Domain
             {
                 Health -= (conflictedObject is Bullet) ? Bullet.Damage : 0;
             };
-        }        
+        }
     }
 }

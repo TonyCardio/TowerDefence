@@ -91,6 +91,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\EnemySpecification.cs" />
+    <Compile Include="Tests\IntegrationTests.cs" />
     <Compile Include="Tests\LevelLoaderSpecification.cs" />
     <Compile Include="Tests\PathFinderSpecification.cs" />
     <Compile Include="Tests\CastleSpecification.cs" />

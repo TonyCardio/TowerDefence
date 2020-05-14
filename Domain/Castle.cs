@@ -4,7 +4,13 @@ namespace TowerDefence.Domain
 {
     public class Castle : ICreature
     {
-        public int Health { get; set; } = 100;
+        public int Health { get; private set; }
+        public bool IsAlive() => Health > 0;
+
+        public Castle()
+        {
+            Health = 100;
+        }
 
         public MovingCommand Act(int x, int y) => new MovingCommand();
 
@@ -13,11 +19,15 @@ namespace TowerDefence.Domain
             return () =>
             {
                 if (conflictedObject is Enemy)
-                    Health -= (conflictedObject as Enemy).PunchPower;
+                    GetDamageOrLoseLevel((conflictedObject as Enemy).PunchPower);
             };
         }
 
-        public bool IsAlive() => Health > 0;
-
+        private void GetDamageOrLoseLevel(int damage)
+        {
+            Health -= damage;
+            if (!IsAlive())
+                Game.LoseLevel();
+        }
     }
 }
