@@ -18,7 +18,7 @@ namespace TowerDefence.Tests
          public void CastleIsNotDestroyed_whenItCreated()
         {
             var castle = new Castle();
-            castle.IsAlive().Should().BeFalse();
+            castle.IsAlive.Should().BeFalse();
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace TowerDefence.Tests
                 castle.ActionInConflict(enemy)();
             }
             castle.Health.Should().Be(0);
-            castle.IsAlive().Should().BeTrue();
+            castle.IsAlive.Should().BeTrue();
         }
     }
 }

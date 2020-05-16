@@ -45,7 +45,7 @@ namespace TowerDefence.Domain
                 var newLoc = animation.TargetLocation;
                 Field.Cells[prevLoc.X, prevLoc.Y] = new Cell(animation.CellType, prevLoc);
                 Field.Cells[newLoc.X, newLoc.Y] = new Cell(animation.CellType, newLoc, 
-                    animation.Creature.IsAlive()? animation.Creature: null);
+                    animation.Creature.IsAlive? animation.Creature: null);
                 processedPoint.Add(animation.TargetLocation);
             }
         }
