@@ -49,6 +49,7 @@ namespace TowerDefence.View
         {
             if (Command.DeltaY == 0 && Command.DeltaX == 0)
                 return;
+            
             //var x = LocationOnControl.X + Command.DeltaX * (Sprite.SpriteSize.Width / 6);
             //var y = LocationOnControl.Y + Command.DeltaY * (Sprite.SpriteSize.Height / 4);
             var x = LocationOnControl.X + Command.DeltaX * SpriteShiftCoeff;
@@ -56,6 +57,10 @@ namespace TowerDefence.View
             var rect = Sprite.SpriteSize;
             Frame = Frame < 3 ? Frame : 0;
             var newRect = new Rectangle(rect.X + 30 * Frame, rect.Y, rect.Width, rect.Height);
+
+            if (Creature is Bullet)
+                newRect = Sprite.SpriteSize;
+
             Sprite.SetTextureRect(newRect);
             LocationOnControl = new Point(x, y);
         }
@@ -108,6 +113,12 @@ namespace TowerDefence.View
             {
                 Sprite = new Sprite(img,rect);
                 Sprite.SetPosition(new Point(5, 150));
+            }
+            else if (Creature is Bullet)
+            {
+                Sprite = new Sprite(new Bitmap(GetPath("SmallSkeleton.png")),
+                    new Rectangle(540, 375, 35, 25));
+                Sprite.SetPosition(new Point(540, 375));
             }
             else
             {
