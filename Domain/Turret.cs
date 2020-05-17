@@ -26,15 +26,12 @@ namespace TowerDefence.Domain
             var bullet = new Bullet(TypeTurretInDirection);
             if (TypeTurretInDirection == Direction.Left)
             {
-                bullet.Act(x, y);
-                if (bullet.IsAlive)
+                if (Game.CurrentLevel.Field.pointBelongsMap(x - 1, y))
                     Game.CurrentLevel.Field.Cells[x - 1, y].Creature = bullet;
-
             }
             if (TypeTurretInDirection == Direction.Up)
             {
-                bullet.Act(x, y);
-                if(bullet.IsAlive)
+                if (Game.CurrentLevel.Field.pointBelongsMap(x, y + 1)) 
                     Game.CurrentLevel.Field.Cells[x, y + 1].Creature = bullet;
             }
             return new MovingCommand();
