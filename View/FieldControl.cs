@@ -114,6 +114,8 @@ namespace TowerDefence.View
 
         private void SpawnTurret(object sender, EventArgs args)
         {
+            if (mouseAnimation == null)
+                return;
             var mousePositionOnControl = PointToClient(MousePosition);
             var mouseLocOnField = new Point(mousePositionOnControl.X / Animation.ElementSize, 
                 mousePositionOnControl.Y / Animation.ElementSize);
