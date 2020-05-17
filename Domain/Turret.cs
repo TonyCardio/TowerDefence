@@ -25,9 +25,18 @@ namespace TowerDefence.Domain
         {
             var bullet = new Bullet(TypeTurretInDirection);
             if (TypeTurretInDirection == Direction.Left)
-                bullet.Act(x - 1, y);
+            {
+                bullet.Act(x, y);
+                if (bullet.IsAlive)
+                    Game.CurrentLevel.Field.Cells[x - 1, y].Creature = bullet;
+
+            }
             if (TypeTurretInDirection == Direction.Up)
-                bullet.Act(x, y + 1);
+            {
+                bullet.Act(x, y);
+                if(bullet.IsAlive)
+                    Game.CurrentLevel.Field.Cells[x, y + 1].Creature = bullet;
+            }
             return new MovingCommand();
         }
 
