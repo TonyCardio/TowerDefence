@@ -31,6 +31,10 @@ namespace TowerDefence.View
             tmrCheckInitLevel.Start();
             DoubleBuffered = true;
 
+            //Количество кадров на анимацию 
+            Animation.FrameCount = 6;
+            Animation.SpriteShiftCoeff = Animation.ElementSize / Animation.FrameCount;
+
             var button = new Button();
             button.Text = "Выбор башни";
             button.Size = new Size(100, 100);
@@ -72,10 +76,10 @@ namespace TowerDefence.View
                 e.Frame = frames;
                 e.ChangeControlLoc();
             }
-            if (frames == 4)
+            if (frames == Animation.FrameCount)
                 fieldState.EndAct();
             frames++;
-            if (frames == 5)
+            if (frames == Animation.FrameCount + 1)
                 frames = 0;
             Invalidate();
         }
@@ -111,7 +115,8 @@ namespace TowerDefence.View
         private void SpawnTurret(object sender, EventArgs args)
         {
             var mousePositionOnControl = PointToClient(MousePosition);
-            var mouseLocOnField = new Point(mousePositionOnControl.X / 32, mousePositionOnControl.Y / 32);
+            var mouseLocOnField = new Point(mousePositionOnControl.X / Animation.ElementSize, 
+                mousePositionOnControl.Y / Animation.ElementSize);
             fieldState.Field.PutTurret((Turret)mouseAnimation.Creature, mouseLocOnField);
             mouseAnimation = null;
         }

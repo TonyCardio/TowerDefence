@@ -11,6 +11,9 @@ namespace TowerDefence.View
 {
     public class Animation
     {
+        public const int ElementSize = 32;
+        public static int FrameCount;
+        public static int SpriteShiftCoeff;
         public Sprite Sprite;
         public ICreature Creature;
         public MovingCommand Command;
@@ -46,8 +49,10 @@ namespace TowerDefence.View
         {
             if (Command.DeltaY == 0 && Command.DeltaX == 0)
                 return;
-            var x = LocationOnControl.X + Command.DeltaX * (Sprite.SpriteSize.Width / 6);
-            var y = LocationOnControl.Y + Command.DeltaY * (Sprite.SpriteSize.Height / 4);
+            //var x = LocationOnControl.X + Command.DeltaX * (Sprite.SpriteSize.Width / 6);
+            //var y = LocationOnControl.Y + Command.DeltaY * (Sprite.SpriteSize.Height / 4);
+            var x = LocationOnControl.X + Command.DeltaX * SpriteShiftCoeff;
+            var y = LocationOnControl.Y + Command.DeltaY * SpriteShiftCoeff;
             var rect = Sprite.SpriteSize;
             Frame = Frame < 3 ? Frame : 0;
             var newRect = new Rectangle(rect.X + 30 * Frame, rect.Y, rect.Width, rect.Height);
@@ -68,7 +73,7 @@ namespace TowerDefence.View
                 bitmap = new Bitmap(GetPath("Empty.png"));
             else if (type == CellType.Road || type == CellType.EnemySpawn)
                 bitmap = new Bitmap(GetPath("Road.png"));
-            Sprite = new Sprite(bitmap,rect);
+            Sprite = new Sprite(bitmap, rect);
             LocationOnControl = new Point(location.X * 32, location.Y * 32);
             LocationOnField = location;
             CellType = type;
