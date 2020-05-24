@@ -11,8 +11,8 @@ namespace TowerDefence.SpriteConst
     {
         public Rectangle rightRect { get; private set; } = new Rectangle(5, 145, 45, 45);
         public Rectangle leftRect { get; private set; } = new Rectangle(1, 400, 45, 45);
-        public Rectangle upRect { get; private set; } = new Rectangle(5, 10, 45, 45);
-        public Rectangle downRect { get; private set; } = new Rectangle(5, 270, 45, 45);
+        public Rectangle upRect { get; private set; } = new Rectangle(5, 270, 45, 45);
+        public Rectangle downRect { get; private set; } = new Rectangle(5, 10, 45, 45);
         public int offset { get; } = 0;
 
         public Rectangle GetRectPerFrame(int frame, Rectangle currentRect)
