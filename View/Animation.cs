@@ -23,6 +23,7 @@ namespace TowerDefence.View
         public Point TargetLocation;
         public CellType CellType;
         public Rectangle HitBox;
+        public ISpriteConst spriteConst;
         public const int  BulletSize = 32;
         public int Frame;
 
@@ -55,12 +56,7 @@ namespace TowerDefence.View
             var x = LocationOnControl.X + Command.DeltaX * SpriteShiftCoeff;
             var y = LocationOnControl.Y + Command.DeltaY * SpriteShiftCoeff;
             var rect = Sprite.SpriteSize;
-            Frame = Frame < 3 ? Frame : 0;
-            var newRect = new Rectangle(rect.X + 30 * Frame, rect.Y, rect.Width, rect.Height);
-
-            if (Creature is Bullet)
-                newRect = Sprite.SpriteSize;
-
+            var newRect = spriteConst.GetRectPerFrame(Frame, rect);
             Sprite.SetTextureRect(newRect);
             LocationOnControl = new Point(x, y);
         }
@@ -72,7 +68,7 @@ namespace TowerDefence.View
 
         public void SetFieldElementSprite()
         {
-            var rect = new Rectangle(0, 0, 32, 32);
+            var rect = new Rectangle(0, 0, ElementSize, ElementSize);
             Bitmap bitmap = null;
             if (CellType == CellType.Empty)
                 bitmap = new Bitmap(GetPath("Empty.png"));
@@ -83,7 +79,7 @@ namespace TowerDefence.View
 
         public void SetFieldElement(CellType type, Point location)
         {
-            LocationOnControl = new Point(location.X * 32, location.Y * 32);
+            LocationOnControl = new Point(location.X * ElementSize, location.Y * ElementSize);
             LocationOnField = location;
             CellType = type;
         }
@@ -105,38 +101,63 @@ namespace TowerDefence.View
         {
             ///Пока не придумал как хранить точки для начала анимаций 
             ///Поэтому только наброски
-            var path = GetPath("HighSkeletonAndGreenMonster.png");
             ISpriteConst spriteConst = null;
-            var img = new Bitmap(path);
-            var rect = new Rectangle(5, 150, 25, 45);
+            Bitmap img = null;
+            string path = null;
+            Rectangle rectangle;
             if (Creature == null)
                 return;
             if (Creature is ShortSkeleton)
             {
-                Sprite = new Sprite(img,rect);
-                Sprite.SetPosition(new Point(5, 150));
+                path = GetPath("SmallSkeleton.png");
+                spriteConst = new SmallSkeletonConst();
             }
             else if (Creature is GreenMonster)
             {
-                Sprite = new Sprite(img,rect);
-                Sprite.SetPosition(new Point(5, 150));
+                path = GetPath("HighSkeletonAndGreenMonster.png");
+                spriteConst = new GreenMonsterConst();
             }
             else if (Creature is Bullet)
             {
-                Sprite = new Sprite(new Bitmap(GetPath("SmallSkeleton.png")),
-                    new Rectangle(540, 375, 35, 25));
-                Sprite.SetPosition(new Point(540, 375));
+                path = GetPath("SmallSkeleton.png");
+                spriteConst = new BulletConst();
+            }
+            else if (Creature is HighSkeleton)
+            {
+                path = GetPath("HighSkeletonAndGreenMonster.png");
+                spriteConst = new HighSkeletonConst();
+            }
+            else if (Creature is Turret)
+            {
+                path = GetPath("TurretSprite.png");
+                spriteConst = new TurretConst();
             }
             else
-            {
-                Sprite = new Sprite(img, rect);
-                Sprite.SetPosition(new Point(0, 0));
-            }
+                throw new Exception("Не описанная сущность");
+            img = new Bitmap(path);
+            rectangle = GetRectanglePerDirection(spriteConst, Command.direction);
+            Sprite = new Sprite(img, rectangle);
+            this.spriteConst = spriteConst;
             SetHitBox(LocationOnField);
             LocationOnControl = new Point(LocationOnField.X * ElementSize, 
                 LocationOnField.Y * ElementSize - Sprite.SpriteSize.Height / 2);
             //....
+        }
 
+        Rectangle GetRectanglePerDirection(ISpriteConst spriteConst, Direction direction)
+        {
+            Rectangle rectangle = default(Rectangle);
+            if (direction == Direction.Up)
+                rectangle = spriteConst.upRect;
+            if (direction == Direction.Down)
+                rectangle = spriteConst.downRect;
+            if (direction == Direction.Left)
+                rectangle = spriteConst.leftRect;
+            if (direction == Direction.Right)
+                rectangle = spriteConst.rightRect;
+            if (direction == Direction.Stay)
+                rectangle = spriteConst.leftRect;
+            return rectangle;
         }
     }
 }

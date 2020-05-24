@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace TowerDefence.SpriteConst
 {
-    interface ISpriteConst
+    public interface ISpriteConst
     {
         Rectangle rightRect { get; }
         Rectangle leftRect { get; }

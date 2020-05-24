@@ -9,7 +9,7 @@ namespace TowerDefence.SpriteConst
     public class GreenMonsterConst : ISpriteConst
     {
         public Rectangle rightRect { get; private set; } = new Rectangle(5, 150, 25, 45);
-        public Rectangle leftRect { get; private set; } = new Rectangle(30, 150, -25, 45);
+        public Rectangle leftRect { get; private set; } = new Rectangle(5, 90, 25, 45);
         public Rectangle upRect { get; private set; } = new Rectangle(5, 215, 25, 40);
         public Rectangle downRect { get; private set; } = new Rectangle(5, 25, 25, 40);
         public int offset { get; private set; } = 30;
