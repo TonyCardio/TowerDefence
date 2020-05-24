@@ -97,6 +97,7 @@
     <Compile Include="SpriteConst\ISpriteConst.cs" />
     <Compile Include="SpriteConst\SmallSkeletonConst.cs" />
     <Compile Include="SpriteConst\TurretConst.cs" />
+    <Compile Include="Tests\TurretSpecification.cs" />
     <Compile Include="Tests\EnemySpecification.cs" />
     <Compile Include="Tests\IntegrationTests.cs" />
     <Compile Include="Tests\CastleSpecification.cs" />
