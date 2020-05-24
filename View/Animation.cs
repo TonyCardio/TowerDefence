@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using TowerDefence.Domain;
 using System.Drawing;
 using System.IO;
+using TowerDefence.SpriteConst;
 
 namespace TowerDefence.View
 {
@@ -105,6 +106,7 @@ namespace TowerDefence.View
             ///Пока не придумал как хранить точки для начала анимаций 
             ///Поэтому только наброски
             var path = GetPath("HighSkeletonAndGreenMonster.png");
+            ISpriteConst spriteConst = null;
             var img = new Bitmap(path);
             var rect = new Rectangle(5, 150, 25, 45);
             if (Creature == null)
@@ -131,8 +133,8 @@ namespace TowerDefence.View
                 Sprite.SetPosition(new Point(0, 0));
             }
             SetHitBox(LocationOnField);
-            LocationOnControl = new Point(LocationOnField.X * 32, 
-                LocationOnField.Y * 32 - Sprite.SpriteSize.Height / 2);
+            LocationOnControl = new Point(LocationOnField.X * ElementSize, 
+                LocationOnField.Y * ElementSize - Sprite.SpriteSize.Height / 2);
             //....
 
         }
