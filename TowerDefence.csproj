@@ -91,6 +91,12 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\BulletSpecification.cs" />
+    <Compile Include="SpriteConst\BulletConst.cs" />
+    <Compile Include="SpriteConst\GreenMonsterConst.cs" />
+    <Compile Include="SpriteConst\HighSkeletonConst.cs" />
+    <Compile Include="SpriteConst\ISpriteConst.cs" />
+    <Compile Include="SpriteConst\SmallSkeletonConst.cs" />
+    <Compile Include="SpriteConst\TurretConst.cs" />
     <Compile Include="Tests\EnemySpecification.cs" />
     <Compile Include="Tests\IntegrationTests.cs" />
     <Compile Include="Tests\CastleSpecification.cs" />

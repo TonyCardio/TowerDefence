@@ -24,7 +24,7 @@ namespace TowerDefence.View
         public FieldControl()
         {
             InitializeComponent();
-            tmrSimGame.Interval = 20;
+            tmrSimGame.Interval = 17;
             tmrSimGame.Tick += TimerEvent;
             tmrCheckInitLevel.Interval = 3;
             tmrCheckInitLevel.Tick += CheckInitLevel;
@@ -32,7 +32,7 @@ namespace TowerDefence.View
             DoubleBuffered = true;
 
             //Количество кадров на анимацию 
-            Animation.FrameCount = 6;
+            Animation.FrameCount = 8;
             Animation.SpriteShiftCoeff = Animation.ElementSize / Animation.FrameCount;
 
             var button = new Button();
