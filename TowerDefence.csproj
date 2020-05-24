@@ -110,6 +110,12 @@
     <Compile Include="View\FieldControl.Designer.cs">
       <DependentUpon>FieldControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="View\FinishedControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="View\FinishedControl.Designer.cs">
+      <DependentUpon>FinishedControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="View\LevelsControl.cs">
       <SubType>UserControl</SubType>
     </Compile>

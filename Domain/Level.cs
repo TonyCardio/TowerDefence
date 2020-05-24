@@ -20,7 +20,7 @@ namespace TowerDefence.Domain
 
         //public event Action EnemyWave;
 
-        public Level(string name, Field field, List<Point> pathToCastle, int wavesCount, int enemiesPerWave = 5)
+        public Level(string name, Field field, List<Point> pathToCastle, int wavesCount, int enemiesPerWave = 6)
         {
             Name = name;
             Field = field;
@@ -59,7 +59,7 @@ namespace TowerDefence.Domain
                             (Enemy)new HighSkeleton(PathSpawnToCastle) :
                             (Enemy)new ShortSkeleton(PathSpawnToCastle) :
                         (Enemy)new GreenMonster(PathSpawnToCastle);
-            //enemy = new GreenMonster(PathSpawnToCastle);
+            enemy.Health = 1;
             var spawn = Field.EnemySpawnPos;
             Field.Cells[spawn.X, spawn.Y].Creature = enemy;
             enemiesLeftToSpawn--;

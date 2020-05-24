@@ -39,8 +39,8 @@ namespace TowerDefence.View
                     ShowScreen(fieldControl);
                     break;
                 case GameStage.Finished:
-                    throw new NotImplementedException();
-                    //break;
+                    ShowScreen(mainMenuControl);
+                    break;
                 default:
                     ShowScreen(mainMenuControl);
                     break;
@@ -57,6 +57,7 @@ namespace TowerDefence.View
         {
             mainMenuControl.Hide();
             levelsControl.Hide();
+            fieldControl.Hide();
         }
     }
 }

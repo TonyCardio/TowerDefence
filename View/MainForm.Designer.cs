@@ -31,6 +31,7 @@
             this.mainMenuControl = new MainMenuControl();
             this.levelsControl = new LevelsControl();
             this.fieldControl = new FieldControl();
+            this.finishedControl = new FinishedControl();
             this.SuspendLayout();
             // 
             // mainMenuControl
@@ -68,6 +69,7 @@
             this.Controls.Add(this.mainMenuControl);
             this.Controls.Add(this.levelsControl);
             this.Controls.Add(this.fieldControl);
+            this.Controls.Add(this.finishedControl);
             this.Name = "MainForm";
             this.Text = "TowerDefence";
             this.ResumeLayout(false);
@@ -79,5 +81,6 @@
         private MainMenuControl mainMenuControl;
         private LevelsControl levelsControl;
         private FieldControl fieldControl;
+        private FinishedControl finishedControl;
     }
 }
