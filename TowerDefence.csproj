@@ -92,8 +92,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tests\EnemySpecification.cs" />
     <Compile Include="Tests\IntegrationTests.cs" />
-    <Compile Include="Tests\LevelLoaderSpecification.cs" />
     <Compile Include="Tests\CastleSpecification.cs" />
+    <Compile Include="Tests\LevelsLoaderSpecification.cs" />
     <Compile Include="View\Animation.cs" />
     <Compile Include="View\FieldControl.cs">
       <SubType>UserControl</SubType>

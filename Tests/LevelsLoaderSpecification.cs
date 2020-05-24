@@ -5,7 +5,7 @@ using TowerDefence.Domain;
 using FluentAssertions;
 using System.Drawing;
 
-namespace Tests
+namespace TowerDefence.Tests
 {
     [TestFixture]
     class LevelLoaderSpecification

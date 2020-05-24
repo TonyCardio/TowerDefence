@@ -8,7 +8,7 @@ using System.Drawing;
 namespace TowerDefence.Tests
 {
     [TestFixture]
-    class CreatEnemy
+    class CreateEnemy
     {
         private List<Point> CorrectPathSpawnToCastle = new List<Point>() { new Point(0, 0), new Point(0, 1), new Point(1, 1) };
         private Enemy enemy;
