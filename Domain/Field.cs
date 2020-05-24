@@ -10,10 +10,6 @@ namespace TowerDefence.Domain
         public Point EnemySpawnPos { get; set; }
         public int Width { get => Cells.GetLength(0); }
         public int Height { get => Cells.GetLength(1); }
-        public bool pointBelongsMap(int x, int y)
-        {
-            return x > 0 && x < Width && y > 0 && y < Height;
-        }
         public Castle Castle { get; set; }
 
         public Field(Cell[,] cells, Point castlePosition, Point enemySpawnPosition)
@@ -45,6 +41,11 @@ namespace TowerDefence.Domain
              *  Размещение размещённой турели в допустимую позицию
              *  Размещение размещённой турели в недопустимую позицию
              */
+        }
+
+        public bool PointBelongsMap(int x, int y)
+        {
+            return x > 0 && x < Width && y > 0 && y < Height;
         }
     }
 }

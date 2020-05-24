@@ -10,7 +10,7 @@ namespace TowerDefence.Domain
     public class Bullet : ICreature
     {
         public static int Damage { get; } = 5;
-        public int CountFlightCompletedPossition { get; set; }
+        public int TimeFlying { get; set; }
         public Direction ShotDirection { get; set; }
         public bool IsAlive { get; set; }
 
@@ -26,7 +26,7 @@ namespace TowerDefence.Domain
             var height = Game.CurrentLevel.Field.Height;
             var width = Game.CurrentLevel.Field.Width;
             var offsetPoint = new Point();
-            if (CountFlightCompletedPossition < 5)
+            if (TimeFlying < 5)
             {
                 if (ShotDirection == Direction.Up)
                     if (y + 1 < height)
@@ -44,7 +44,7 @@ namespace TowerDefence.Domain
                         offsetPoint.X = 0;
                         Destroy();
                     }
-                CountFlightCompletedPossition++;
+                TimeFlying++;
             }
             else
                 Destroy();
