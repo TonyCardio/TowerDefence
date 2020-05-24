@@ -135,6 +135,11 @@ namespace TowerDefence.View
                 direction = newCreature.DirectionType;
                 spriteConst = new TurretConst();
             }
+            else if (Creature is Castle)
+            {
+                path = GetPath("SmallSkeleton.png");
+                spriteConst = new SmallSkeletonConst();
+            }
             else
                 throw new Exception("Не описанная сущность");
             img = new Bitmap(path);
