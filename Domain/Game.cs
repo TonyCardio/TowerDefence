@@ -13,7 +13,7 @@ namespace TowerDefence.Domain
         public static event Action<GameStage> StateChanged;
 
         public static List<Level> Levels { get; set; }
-        public static Level CurrentLevel { get; private set; } = null;
+        public static Level CurrentLevel { get; set; } = null;
 
         static Game()
         {
