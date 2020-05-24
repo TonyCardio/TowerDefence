@@ -1,10 +1,12 @@
 ﻿using System;
+using System.Drawing;
+using System.IO;
 
 namespace TowerDefence.Domain
 {
     public class Turret : ITurret, ICreature
     {
-        // положение на поле x y  -необязательное-
+        public Field Field { get; set; }
         public int Cost { get; set; }
         public int ShotPower { get; set; }
         public int CoolDown { get; set; }
@@ -12,8 +14,9 @@ namespace TowerDefence.Domain
         public Direction DirectionType { get; set; }
         public bool IsAlive { get; set; } = true;
 
-        public Turret(int cost, int shotPower, int shotsBeforeCoolDown, int coolDown, Direction direction)
+        public Turret(Field field, int cost, int shotPower, int shotsBeforeCoolDown, int coolDown, Direction direction)
         {
+            Field = field;
             Cost = cost;
             ShotPower = shotPower;
             CoolDown = coolDown;
@@ -25,11 +28,9 @@ namespace TowerDefence.Domain
         {
             var bullet = new Bullet(DirectionType);
             if (DirectionType == Direction.Left)
-                if (Game.CurrentLevel.Field.PointBelongsMap(x - 1, y))
-                    Game.CurrentLevel.Field.Cells[x - 1, y].Creature = bullet;
+                Field.ShotBullet(bullet, new Point(x - 1, y));
             if (DirectionType == Direction.Up)
-                if (Game.CurrentLevel.Field.PointBelongsMap(x, y + 1))
-                    Game.CurrentLevel.Field.Cells[x, y + 1].Creature = bullet;
+                Field.ShotBullet(bullet, new Point(x, y + 1));
             return new MovingCommand();
         }
 

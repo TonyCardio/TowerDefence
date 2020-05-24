@@ -105,9 +105,9 @@ namespace TowerDefence.View
         private void ButtonClick(object sender, EventArgs args)
         {
             mouseAnimation = new Animation();
-            mouseAnimation.Sprite = new Sprite(new Bitmap(mouseAnimation.GetPath("MousePos.png")), 
+            mouseAnimation.Sprite = new Sprite(new Bitmap(mouseAnimation.GetPath("MousePos.png")),
                 new Rectangle(0, 0, 32, 32));
-            mouseAnimation.Creature = new VerticalTurret();
+            mouseAnimation.Creature = new VerticalTurret(Game.CurrentLevel.Field);
         }
 
         private void DrawMouseMove(PaintEventArgs e)
@@ -123,7 +123,7 @@ namespace TowerDefence.View
             if (mouseAnimation == null)
                 return;
             var mousePositionOnControl = PointToClient(MousePosition);
-            var mouseLocOnField = new Point(mousePositionOnControl.X / Animation.ElementSize, 
+            var mouseLocOnField = new Point(mousePositionOnControl.X / Animation.ElementSize,
                 mousePositionOnControl.Y / Animation.ElementSize);
             fieldState.Field.PutTurret((Turret)mouseAnimation.Creature, mouseLocOnField);
             mouseAnimation = null;

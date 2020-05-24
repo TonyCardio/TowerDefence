@@ -29,7 +29,7 @@ namespace TowerDefence.Domain
                 throw new InvalidOperationException();
             if (Cells[point.X, point.Y].Type == CellType.Empty)
             {
-                Cells[point.X, point.Y] = new Cell(CellType.Empty, point, turret);
+                Cells[point.X, point.Y].Creature = turret;
                 return true;
             }
             return false;
@@ -43,9 +43,29 @@ namespace TowerDefence.Domain
              */
         }
 
+        public bool ShotBullet(Bullet bullet, Point point)
+        {
+            if (point.X < 0 && point.X >= Width &&
+                point.Y < 0 && point.Y >= Height)
+                throw new ArgumentException();
+            if (Cells[point.X, point.Y]?.Creature as Turret != null)
+                // Мб вернуть false если захотим реализовать подсвечивание красненьким
+                throw new InvalidOperationException();
+            Cells[point.X, point.Y].Creature = bullet;
+            return true;
+            /*
+             * Tests:
+             *  Разместить -> проверить размещение
+             *  Размещение за пределами
+             *  Размещение на дороге
+             *  Размещение размещённой турели в допустимую позицию
+             *  Размещение размещённой турели в недопустимую позицию
+             */
+        }
+
         public bool PointBelongsMap(int x, int y)
         {
-            return x > 0 && x < Width && y > 0 && y < Height;
+            return x >= 0 && x < Width && y >= 0 && y < Height;
         }
     }
 }
