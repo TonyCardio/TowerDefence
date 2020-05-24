@@ -105,6 +105,7 @@ namespace TowerDefence.View
             Bitmap img = null;
             string path = null;
             Rectangle rectangle;
+            Direction direction = Command.direction;
             if (Creature == null)
                 return;
             if (Creature is ShortSkeleton)
@@ -130,12 +131,14 @@ namespace TowerDefence.View
             else if (Creature is Turret)
             {
                 path = GetPath("TurretSprite.png");
+                var newCreature = Creature as Turret;
+                direction = newCreature.DirectionType;
                 spriteConst = new TurretConst();
             }
             else
                 throw new Exception("Не описанная сущность");
             img = new Bitmap(path);
-            rectangle = GetRectanglePerDirection(spriteConst, Command.direction);
+            rectangle = GetRectanglePerDirection(spriteConst, direction);
             Sprite = new Sprite(img, rectangle);
             this.spriteConst = spriteConst;
             SetHitBox(LocationOnField);
