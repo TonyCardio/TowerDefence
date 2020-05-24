@@ -4,30 +4,29 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace TowerDefence.Domain
 {
-    public class Game
+    public static class Game
     {
-        public GameStage Stage { get; private set; } = GameStage.MainMenu;
-        public event Action<GameStage> StateChanged;
+        public static GameStage Stage { get; private set; } = GameStage.MainMenu;
+        public static event Action<GameStage> StateChanged;
 
-        public List<Level> Levels { get; set; }
-        public Level CurrentLevel { get; set; }
+        public static List<Level> Levels { get; set; }
+        public static Level CurrentLevel = null;
 
-        public Game()
+        static Game()
         {
             Levels = LoadLevels();
         }
 
-        public void RunLevel()
+        public static void RunLevel()
         {
             CurrentLevel.Run();
             ChangeStage(GameStage.RunningLevel);
         }
 
-        private List<Level> LoadLevels()
+        private static List<Level> LoadLevels()
         {
             var levels = new List<Level>();
             foreach (var lvlName in LevelsLoader.GetLevelsNames())
@@ -35,28 +34,33 @@ namespace TowerDefence.Domain
             return levels;
         }
 
-        public void StartChooseLevel()
+        public static void StartChooseLevel()
         {
             ChangeStage(GameStage.ChoosingLevel);
         }
 
-        public void ChoseLevel(string levelName)
+        public static void ChoseLevel(string levelName)
         {
-            CurrentLevel = Levels
+            SetLevel(Levels
                 .Where(lvl => lvl.Name == levelName)
-                .FirstOrDefault();
+                .FirstOrDefault());
             ChangeStage(GameStage.LevelNotStarted);
         }
 
-        public void LoseLevel()
+        public static void SetLevel(Level level)
         {
-            CurrentLevel.Lose();
+            CurrentLevel = level;
+        }
+
+        public static void LoseLevel()
+        {
+            CurrentLevel?.Lose();
             ChangeStage(GameStage.Finished);
         }
 
-        private void ChangeStage(GameStage stage)
+        private static void ChangeStage(GameStage stage)
         {
-            Stage = stage;
+            Game.Stage = stage;
             StateChanged?.Invoke(stage);
         }
     }

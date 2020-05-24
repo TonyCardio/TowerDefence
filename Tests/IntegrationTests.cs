@@ -30,7 +30,6 @@ namespace TowerDefence.Tests
         {
             var validLines = new[] { "00000\r\n32221\r\n00000\r\n", "1" };
             var level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
-            Game.CurrentLevel = level;
             var state = new FieldState(level.Field);
             var turret = new HorizontalTurret(level.Field);
             level.Field.PutTurret(turret, new Point(3, 0));
@@ -43,8 +42,7 @@ namespace TowerDefence.Tests
         {
             var validLines = new[] { "31", "1" };
             var level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
-            //Game.CurrentLevel = level;
-            Game.SetLevel(level);
+            Game.CurrentLevel = level;
             var spawn = level.Field.EnemySpawnPos;
             var state = new FieldState(level.Field);
             for (int i = 0; i < 10; i++)
