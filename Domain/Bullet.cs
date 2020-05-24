@@ -25,31 +25,22 @@ namespace TowerDefence.Domain
         public MovingCommand Act(int x, int y)
         {
             var height = Game.CurrentLevel.Field.Height;
-            var width = Game.CurrentLevel.Field.Width;
             var offsetPoint = new Point();
             if (TimeFlying < 5)
             {
                 if (ShotDirection == Direction.Up)
-                    if (y + 1 < height)
-                        offsetPoint.Y = 1;
-                    else
-                    {
-                        offsetPoint.Y = 0;
-                        Destroy();
-                    }
+                    offsetPoint.Y = 1;
                 if (ShotDirection == Direction.Left)
-                    if (x > 0)
-                        offsetPoint.X = -1;
-                    else
-                    {
-                        offsetPoint.X = 0;
-                        Destroy();
-                    }
+                    offsetPoint.X = -1;
+                if (y + offsetPoint.Y >= height || x + offsetPoint.X < 0)
+                {
+                    Destroy();
+                    offsetPoint = new Point();
+                }
                 TimeFlying++;
             }
             else
                 Destroy();
-
             return new MovingCommand()
             {
                 DeltaX = offsetPoint.X,
@@ -62,7 +53,7 @@ namespace TowerDefence.Domain
         {
             return () =>
             {
-                if (conflictedObject is Enemy)
+                if (conflictedObject is Enemy || conflictedObject is Castle)
                     Destroy();
             };
         }

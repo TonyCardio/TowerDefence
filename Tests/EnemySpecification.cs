@@ -10,82 +10,39 @@ namespace TowerDefence.Tests
     [TestFixture]
     class CreateEnemy
     {
-        private List<Point> CorrectPathSpawnToCastle = new List<Point>() { new Point(0, 0), new Point(0, 1), new Point(1, 1) };
-        private Enemy enemy;
-        [Test]
-        public void CreateHighSkeletonWithCorrectPath_CheckProperties()
+        private string[] validLines;
+        private Level level;
+        private Point spawnPos;
+        private FieldState state;
+        private GreenMonster monster;
+
+        [SetUp]
+        public void SetUp()
         {
-            enemy = new HighSkeleton(CorrectPathSpawnToCastle);
-            enemy.Health.Should().Be(30);
-            enemy.PunchPower.Should().Be(10);
-            enemy.Speed.Should().Be(1);
+            validLines = new[] { "000\r\n321\r\n000\r\n", "1" };
+            level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
+            state = new FieldState(level.Field);
+            spawnPos = level.Field.EnemySpawnPos;
+            monster = new GreenMonster(level.PathSpawnToCastle);
+            level.Field.Cells[spawnPos.X, spawnPos.Y].Creature = monster;
         }
 
         [Test]
-        public void CreateShortSkeletonWithCorrectPath_CheckProperties()
+        public void EnemyReachesCastleAndDies()
         {
-            enemy = new ShortSkeleton(CorrectPathSpawnToCastle);
-            enemy.Health.Should().Be(25);
-            enemy.PunchPower.Should().Be(5);
-            enemy.Speed.Should().Be(2);
+            for(int i = 0; i < level.PathSpawnToCastle.Count; i++)
+            {
+                state.BeginAct();
+                state.EndAct();
+            }
+            monster.IsAtCastle().Should().BeTrue();
+            monster.IsAlive.Should().BeFalse();
         }
-
-        [Test]
-        public void CreateGreenMonsterWithCorrectPath_CheckProperties()
-        {
-            enemy = new GreenMonster(CorrectPathSpawnToCastle);
-            enemy.Health.Should().Be(20);
-            enemy.PunchPower.Should().Be(5);
-            enemy.Speed.Should().Be(2);
-        }
-
 
         [Test]
         public void CorrectStartPosition()
         {
-            enemy = new HighSkeleton(CorrectPathSpawnToCastle);
-            enemy.Position.Should().Be(new Point(0, 0));
-        }
-
-        [Test]
-        public void MoveEnemyToCastle()
-        {
-            enemy = new GreenMonster(CorrectPathSpawnToCastle);
-            enemy.Act(0, 1);
-            enemy.Act(1, 1);
-            enemy.IsAtCastle().Should().BeTrue();
-            enemy.Position.Should().Be(new Point(1, 1));
-        }
-
-        [Test]
-        public void TryMakeStep_WhenEnemyCameToCastle()
-        {
-            enemy = new GreenMonster(CorrectPathSpawnToCastle);
-            enemy.Act(0, 1);
-            enemy.Act(1, 1);
-            enemy.Act(1, 2);
-            enemy.IsAtCastle().Should().BeTrue();
-            enemy.Position.Should().Be(new Point(1, 1));
-
-        }
-
-        [Test]
-        public void EmemyIsLife_whenHeWasCreated()
-        {
-            enemy = new ShortSkeleton(CorrectPathSpawnToCastle);
-            enemy.IsAlive.Should().BeTrue();
-        }
-
-        [Test]
-        public void DealingDamageToDeath()
-        {
-            enemy = new GreenMonster(CorrectPathSpawnToCastle);
-            var bullet = new Bullet(Direction.Stay);
-            for(int i =0; i < 4 ; i++)
-            {
-                enemy.ActionInConflict(bullet)();
-            }
-            enemy.IsAlive.Should().BeFalse();
+            monster.Position.Should().Be(spawnPos);
         }
     }
 }

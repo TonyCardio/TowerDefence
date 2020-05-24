@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using NUnit.Framework;
 using TowerDefence.Domain;
 using FluentAssertions;
@@ -8,41 +9,30 @@ using System.Drawing;
 namespace TowerDefence.Tests
 {
     [TestFixture]
-    class BulletSpecification
+    class TurretSpecification
     {
         private string[] validLines;
         private Level level;
         private FieldState state;
-        private Bullet bullet;
+        private Turret horizontalturret;
 
         [SetUp]
         public void SetUp()
         {
-            validLines = new[] { "000000\r\n322221\r\n000000\r\n", "1" };
+            validLines = new[] { "00000\r\n32221\r\n00000\r\n", "1" };
             level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
             Game.CurrentLevel = level;
             state = new FieldState(level.Field);
-            bullet = new Bullet(Direction.Up);
-            level.Field.Cells[1, 0].Creature = bullet;
+            horizontalturret = new HorizontalTurret(level.Field);
+            level.Field.PutTurret(horizontalturret, new Point(3, 0));
         }
 
         [Test]
-        public void BulletMakeCorrectStep()
+        public void CorrectTurretShot()
         {
             state.BeginAct();
             state.EndAct();
-            (level.Field.Cells[1, 1].Creature is Bullet).Should().BeTrue();
-        }
-
-        [Test]
-        public void BulletDestroyedWhenGoesBeyondMap()
-        {
-            for(var i= 0; i<3; i++)
-            {
-                state.BeginAct();
-                state.EndAct();
-            }
-            bullet.IsAlive.Should().BeFalse();
+            (level.Field.Cells[2, 0].Creature is Bullet).Should().BeTrue();
         }
     }
 }
