@@ -9,43 +9,27 @@ using System.Drawing;
 namespace TowerDefence.Tests
 {
     [TestFixture]
-    class IntegrationTests
+    public class IntegrationTests
     {
-        [Test]
-        public void Test()
-        {
-            var validLines = new[] { "000\r\n321\r\n000\r\n", "1" };
-            var level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
-            var state = new FieldState(level.Field);
-            var spawn = level.Field.EnemySpawnPos;
-            var monster = new GreenMonster(level.PathSpawnToCastle);
-            level.Field.Cells[spawn.X, spawn.Y].Creature = monster;
-            state.BeginAct();
-            state.EndAct();
-            monster.Position.Should().Be(level.PathSpawnToCastle[1]);
-        }
+        private string[] validLines;
+        private Level level;
+        private Point spawn;
+        private FieldState state;
 
-        [Test]
-        public void Test2()
+        [SetUp]
+        public void SetUp()
         {
-            var validLines = new[] { "00000\r\n32221\r\n00000\r\n", "1" };
-            var level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
-            var state = new FieldState(level.Field);
-            var turret = new HorizontalTurret(level.Field);
-            level.Field.PutTurret(turret, new Point(3, 0));
-            state.BeginAct();
-            state.EndAct();
+            validLines = new[] { "000\r\n321", "1" };
+            level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
+            Game.CurrentLevel = level;
+            spawn = level.Field.EnemySpawnPos;
+            state = new FieldState(level.Field);
         }
 
         [Test]
         public void Game_ShouldBeLost_WhenCastleDestroyed()
         {
-            var validLines = new[] { "31", "1" };
-            var level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
-            Game.CurrentLevel = level;
-            var spawn = level.Field.EnemySpawnPos;
-            var state = new FieldState(level.Field);
-            for (int i = 0; i < 10; i++)
+            for (int i = 0; i < 20; i++)
             {
                 level.Field.Cells[spawn.X, spawn.Y].Creature = new HighSkeleton(level.PathSpawnToCastle);
                 state.BeginAct();
@@ -54,6 +38,22 @@ namespace TowerDefence.Tests
                 state.EndAct();
             }
             level.IsLost.Should().Be(true);
+            Game.Stage.Should().Be(GameStage.Finished);
+        }
+
+        [Test]
+        public void Game_ShouldBeWon_WhenAllEnemiesDied()
+        {
+            var monster = new GreenMonster(level.PathSpawnToCastle);
+            monster.IsLastInlevel = true;
+            monster.Health = 1;
+            level.Field.Cells[1, 0].Creature = new Bullet(Direction.Up);
+            level.Field.Cells[spawn.X, spawn.Y].Creature = monster;
+            state.BeginAct();
+            state.EndAct();
+            state.BeginAct();
+            state.EndAct();
+            level.IsLost.Should().Be(false);
             Game.Stage.Should().Be(GameStage.Finished);
         }
     }

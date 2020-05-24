@@ -30,7 +30,7 @@ namespace TowerDefence.Domain
                     var creature = cell.Creature;
                     if (creature == null) continue;
                     var command = creature.Act(x, y);
-                    Animations.Add(new Animation(creature, command, new Point(x, y), 0,cell.Type));
+                    Animations.Add(new Animation(creature, command, new Point(x, y), 0, cell.Type));
                 }
         }
 
@@ -45,13 +45,13 @@ namespace TowerDefence.Domain
                 var newLoc = animation.TargetLocation;
                 Field.Cells[prevLoc.X, prevLoc.Y] = new Cell(animation.CellType, prevLoc);
                 var nextCell = Field.Cells[newLoc.X, newLoc.Y];
-                Field.Cells[newLoc.X, newLoc.Y] = new Cell(nextCell.Type, newLoc, 
-                    animation.Creature.IsAlive? animation.Creature: null);
+                Field.Cells[newLoc.X, newLoc.Y] = new Cell(nextCell.Type, newLoc,
+                    animation.Creature.IsAlive ? animation.Creature : null);
                 processedPoint.Add(animation.TargetLocation);
             }
         }
 
-        private  void SelectWinnerCandidatePerLocation(int x, int y)
+        private void SelectWinnerCandidatePerLocation(int x, int y)
         {
             var candidates = GetCandidatesPerLocation(x, y);
             var alive = candidates.ToList();
@@ -64,7 +64,7 @@ namespace TowerDefence.Domain
         private List<ICreature> GetCandidatesPerLocation(int x, int y)
         {
             var candidates = new List<ICreature>();
-            foreach(var e in Animations)
+            foreach (var e in Animations)
                 if (e.TargetLocation.Equals(new Point(x, y)))
                     candidates.Add(e.Creature);
             return candidates;

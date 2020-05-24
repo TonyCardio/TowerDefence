@@ -38,14 +38,12 @@ namespace TowerDefence.Domain
             waveTimer.Start();
         }
 
-        public void OnWaveStart(object sender, EventArgs e)
+        private void OnWaveStart(object sender, EventArgs e)
         {
             if (WavesCount <= 0)
             {
-                waveTimer.Stop();
                 spawnTimer.Dispose();
                 waveTimer.Dispose();
-
             }
             else
             {
@@ -54,7 +52,7 @@ namespace TowerDefence.Domain
             }
         }
 
-        public void OnSpawn(object sender, EventArgs e)
+        private void OnSpawn(object sender, EventArgs e)
         {
             var enemy = enemiesLeftToSpawn < 2 * (EnemiesPerWave / 3) ?
                             enemiesLeftToSpawn < EnemiesPerWave / 3 ?
@@ -68,6 +66,11 @@ namespace TowerDefence.Domain
             if (enemiesLeftToSpawn <= 0)
             {
                 WavesCount--;
+                if (WavesCount == 0)
+                {
+                    enemy.IsLastInlevel = true;
+                    waveTimer.Stop();
+                }
                 spawnTimer.Stop();
             }
         }

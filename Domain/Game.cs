@@ -41,15 +41,10 @@ namespace TowerDefence.Domain
 
         public static void ChoseLevel(string levelName)
         {
-            SetLevel(Levels
+            CurrentLevel = Levels
                 .Where(lvl => lvl.Name == levelName)
-                .FirstOrDefault());
+                .FirstOrDefault();
             ChangeStage(GameStage.LevelNotStarted);
-        }
-
-        public static void SetLevel(Level level)
-        {
-            CurrentLevel = level;
         }
 
         public static void LoseLevel()
@@ -58,9 +53,14 @@ namespace TowerDefence.Domain
             ChangeStage(GameStage.Finished);
         }
 
+        public static void WinLevel()
+        {
+            ChangeStage(GameStage.Finished);
+        }
+
         private static void ChangeStage(GameStage stage)
         {
-            Game.Stage = stage;
+            Stage = stage;
             StateChanged?.Invoke(stage);
         }
     }

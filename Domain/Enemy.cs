@@ -13,6 +13,7 @@ namespace TowerDefence.Domain
         public Point Position { get; set; }
         public List<Point> PathSpawnToCastle { get; set; }
         public int CurrentIndexOfPath { get; set; }
+        public bool IsLastInlevel { get; set; }
 
         //public static event Action<int> PathSpawnToCastlePassed;
 
@@ -37,8 +38,9 @@ namespace TowerDefence.Domain
                 CurrentIndexOfPath++;
             else
             {
-                //PathSpawnToCastlePassed?.Invoke(PunchPower);
                 Health = 0;
+                if (IsLastInlevel)
+                    Game.WinLevel();
                 return new MovingCommand() { direction = direction, DeltaX = 0, DeltaY = 0 };
             }
             var pathPoint = PathSpawnToCastle[CurrentIndexOfPath];
@@ -61,6 +63,8 @@ namespace TowerDefence.Domain
             return () =>
             {
                 Health -= (conflictedObject is Bullet) ? Bullet.Damage : 0;
+                if (!IsAlive && IsLastInlevel)
+                    Game.WinLevel();
             };
         }
     }
