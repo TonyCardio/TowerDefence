@@ -32,8 +32,8 @@ namespace TowerDefence.Tests
             var level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
             Game.CurrentLevel = level;
             var state = new FieldState(level.Field);
-            var turret = new HorizontalTurret();
-            level.Field.PutTurret(turret, new Point(4, 0));
+            var turret = new HorizontalTurret(level.Field);
+            level.Field.PutTurret(turret, new Point(3, 0));
             state.BeginAct();
             state.EndAct();
         }

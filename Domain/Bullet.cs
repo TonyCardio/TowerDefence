@@ -50,7 +50,12 @@ namespace TowerDefence.Domain
             else
                 Destroy();
 
-            return new MovingCommand() { DeltaX = offsetPoint.X, DeltaY = offsetPoint.Y, direction = ShotDirection };
+            return new MovingCommand()
+            {
+                DeltaX = offsetPoint.X,
+                DeltaY = offsetPoint.Y,
+                direction = ShotDirection
+            };
         }
 
         public Action ActionInConflict(ICreature conflictedObject)
