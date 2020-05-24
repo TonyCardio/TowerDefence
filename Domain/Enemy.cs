@@ -45,8 +45,8 @@ namespace TowerDefence.Domain
             var deltaPoint = new Point(pathPoint.X - x, pathPoint.Y - y);
             if (deltaPoint.X == 1) direction = Direction.Right;
             if (deltaPoint.X == -1) direction = Direction.Left;
-            if (deltaPoint.Y == 1) direction = Direction.Up;
-            if (deltaPoint.Y == -1) direction = Direction.Down;
+            if (deltaPoint.Y == 1) direction = Direction.Down;
+            if (deltaPoint.Y == -1) direction = Direction.Up;
             Position = PathSpawnToCastle[CurrentIndexOfPath];
             return new MovingCommand
             {
