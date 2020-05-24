@@ -14,18 +14,18 @@ namespace TowerDefence.Domain
         public int WavesCount { get; set; }
         public int EnemiesPerWave { get; set; }
         private Timer waveTimer = new Timer();
-        private Timer spawnTimer = new Timer();
+        public Timer spawnTimer = new Timer();
         private int enemiesLeftToSpawn;
 
         //public event Action EnemyWave;
 
-        public Level(string name, Field field, List<Point> pathToCastle, int wavesCount)
+        public Level(string name, Field field, List<Point> pathToCastle, int wavesCount, int enemiesPerWave = 5)
         {
             Name = name;
             Field = field;
             PathSpawnToCastle = pathToCastle;
             WavesCount = wavesCount;
-            EnemiesPerWave = 5; // Добавить в Levels, LevelsLoader и этот конструктор
+            EnemiesPerWave = enemiesPerWave; // Добавить в Levels, LevelsLoader и этот конструктор
             waveTimer.Interval = 20000;
             spawnTimer.Interval = 1000;
             waveTimer.Tick += OnWaveStart;
@@ -37,7 +37,7 @@ namespace TowerDefence.Domain
             waveTimer.Start();
         }
 
-        private void OnWaveStart(object sender, EventArgs e)
+        public void OnWaveStart(object sender, EventArgs e)
         {
             if (WavesCount <= 0)
             {
@@ -53,7 +53,7 @@ namespace TowerDefence.Domain
             }
         }
 
-        private void OnSpawn(object sender, EventArgs e)
+        public void OnSpawn(object sender, EventArgs e)
         {
             var enemy = enemiesLeftToSpawn < 2 * (EnemiesPerWave / 3) ?
                             enemiesLeftToSpawn < EnemiesPerWave / 3 ?

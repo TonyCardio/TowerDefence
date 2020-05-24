@@ -50,6 +50,5 @@ namespace TowerDefence.Domain
                     yield return newPoint;
                 }
         }
-
     }
 }

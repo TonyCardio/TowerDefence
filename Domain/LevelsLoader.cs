@@ -67,6 +67,7 @@ namespace TowerDefence.Domain
                 result.Add(path.Previous.Value);
                 path = path.Previous;
             }
+            result.Reverse();
             return result.Count != 1 ? result : throw new ArgumentException("Can`t find path to Castle");
         }
     }

@@ -16,6 +16,7 @@ namespace Tests
         private Point spawnPos;
         private int wavesCount;
         private string name;
+        private List<Point> enemyPath;
 
         [SetUp]
         public void SetUp()
@@ -27,6 +28,7 @@ namespace Tests
             spawnPos = new Point(2, 1);
             invalidLines = new[] { "000\r\n-500\r\n000", "1" };
             validLines = new[] { "000\r\n321\r\n000\r\n", "1" };
+            enemyPath = new List<Point>() { new Point(2, 1), new Point(1, 1), new Point(0, 1) };
         }
 
         [Test]
@@ -44,6 +46,20 @@ namespace Tests
         {
             Action action = () => LevelsLoader.LoadLevelFromLines(invalidLines, name);
             action.Should().Throw<ArgumentException>();
+        }
+
+        [Test]
+        public void CreateEnemysPath_ShouldThrowException_WhenNotExists()
+        {
+            Action action = () => LevelsLoader.LoadLevelFromLines(invalidLines, "TestLevel");
+            action.Should().Throw<ArgumentException>();
+        }
+
+        [Test]
+        public void CreateEnemysPath_ShouldFindPath_WhenExists()
+        {
+            var level = LevelsLoader.LoadLevelFromLines(validLines, "TestLevel");
+            CollectionAssert.AreEqual(level.PathSpawnToCastle, enemyPath);
         }
 
         [TestCase(new[] { "000\r\n323\r\n000\r\n", "1" }, "twoCastles")]

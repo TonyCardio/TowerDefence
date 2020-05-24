@@ -70,7 +70,13 @@ namespace TowerDefence.View
         private void TimerEvent(object sender, EventArgs args)
         {
             if (frames == 0)
+            {
                 fieldState.BeginAct();
+                foreach (var anim in fieldState.Animations)
+                    anim.SetSprite();
+                foreach (var staticObject in fieldState.StaticObject)
+                    staticObject.SetFieldElementSprite();
+            }
             foreach (var e in fieldState.Animations)
             {
                 e.Frame = frames;

@@ -6,21 +6,15 @@ namespace TowerDefence.Domain
 {
     public class Enemy : IEnemy, ICreature
     {
-        public static event Action<int> PathSpawnToCastlePassed;
-
         public int Health { get; set; }
-
         public bool IsAlive { get => Health > 0; set { } }
-
         public int PunchPower { get; set; }
-
         public int Speed { get; set; }
-
         public Point Position { get; set; }
-
         public List<Point> PathSpawnToCastle { get; set; }
+        public int CurrentIndexOfPath { get; set; }
 
-        public int currentIndexOfPath { get; set; }
+        //public static event Action<int> PathSpawnToCastlePassed;
 
         public Enemy(List<Point> path, int health, int punchPower, int speed)
         {
@@ -34,26 +28,26 @@ namespace TowerDefence.Domain
             Speed = speed;
         }
 
-        public bool IsAtCastle() => (currentIndexOfPath == PathSpawnToCastle.Count - 1);
+        public bool IsAtCastle() => (CurrentIndexOfPath == PathSpawnToCastle.Count - 1);
 
         public MovingCommand Act(int x, int y)
         {
             Direction direction = Direction.Stay;
             if (!IsAtCastle())
-                currentIndexOfPath++;
+                CurrentIndexOfPath++;
             else
             {
                 //PathSpawnToCastlePassed?.Invoke(PunchPower);
                 Health = 0;
                 return new MovingCommand() { direction = direction, DeltaX = 0, DeltaY = 0 };
             }
-            var deltaPoint = new Point(PathSpawnToCastle[PathSpawnToCastle.Count - currentIndexOfPath].X - x,
-                PathSpawnToCastle[PathSpawnToCastle.Count - currentIndexOfPath].Y - y);
+            var pathPoint = PathSpawnToCastle[CurrentIndexOfPath];
+            var deltaPoint = new Point(pathPoint.X - x, pathPoint.Y - y);
             if (deltaPoint.X == 1) direction = Direction.Right;
             if (deltaPoint.X == -1) direction = Direction.Left;
             if (deltaPoint.Y == 1) direction = Direction.Up;
             if (deltaPoint.Y == -1) direction = Direction.Down;
-            Position = PathSpawnToCastle[currentIndexOfPath];
+            Position = PathSpawnToCastle[CurrentIndexOfPath];
             return new MovingCommand
             {
                 direction = direction,
