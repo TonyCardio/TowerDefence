@@ -8,16 +8,16 @@ namespace TowerDefence.Domain
         public int Cost { get; set; }
         public int ShotPower { get; set; }
         public int CoolDown { get; set; }
-        public int ShotsBeforCoolDown { get; set; }
+        public int ShotsBeforeCoolDown { get; set; }
         public Direction DirectionType { get; set; }
         public bool IsAlive { get; set; } = true;
 
-        public Turret(int cost, int shotPower, int shotsBeforCoolDown, int coolDown, Direction direction)
+        public Turret(int cost, int shotPower, int shotsBeforeCoolDown, int coolDown, Direction direction)
         {
             Cost = cost;
             ShotPower = shotPower;
             CoolDown = coolDown;
-            ShotsBeforCoolDown = shotsBeforCoolDown;
+            ShotsBeforeCoolDown = shotsBeforeCoolDown;
             DirectionType = direction;
         }
 

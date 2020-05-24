@@ -17,6 +17,7 @@ namespace TowerDefence.Domain
         public Bullet(Direction direction)
         {
             ShotDirection = direction;
+            IsAlive = true;
         }
 
         private void Destroy() => IsAlive = false;
