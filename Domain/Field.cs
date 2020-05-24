@@ -17,6 +17,8 @@ namespace TowerDefence.Domain
             Cells = cells;
             CastlePos = castlePosition;
             EnemySpawnPos = enemySpawnPosition;
+            Castle = new Castle();
+            Cells[castlePosition.X, castlePosition.Y].Creature = Castle;
         }
 
         public bool PutTurret(Turret turret, Point point)

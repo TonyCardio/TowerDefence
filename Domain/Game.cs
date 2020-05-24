@@ -9,11 +9,11 @@ namespace TowerDefence.Domain
 {
     public static class Game
     {
-        static GameStage stage = GameStage.MainMenu;
+        public static GameStage Stage { get; private set; } = GameStage.MainMenu;
         public static event Action<GameStage> StateChanged;
 
         public static List<Level> Levels { get; set; }
-        public static Level CurrentLevel { get; set; } = null;
+        public static Level CurrentLevel = null;
 
         static Game()
         {
@@ -41,20 +41,26 @@ namespace TowerDefence.Domain
 
         public static void ChoseLevel(string levelName)
         {
-            CurrentLevel = Levels
+            SetLevel(Levels
                 .Where(lvl => lvl.Name == levelName)
-                .FirstOrDefault();
+                .FirstOrDefault());
             ChangeStage(GameStage.LevelNotStarted);
+        }
+
+        public static void SetLevel(Level level)
+        {
+            CurrentLevel = level;
         }
 
         public static void LoseLevel()
         {
+            CurrentLevel?.Lose();
             ChangeStage(GameStage.Finished);
         }
 
         private static void ChangeStage(GameStage stage)
         {
-            Game.stage = stage;
+            Game.Stage = stage;
             StateChanged?.Invoke(stage);
         }
     }
