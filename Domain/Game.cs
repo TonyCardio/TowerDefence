@@ -4,29 +4,30 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace TowerDefence.Domain
 {
-    public static class Game
+    public class Game
     {
-        static GameStage stage = GameStage.MainMenu;
-        public static event Action<GameStage> StateChanged;
+        public GameStage Stage { get; private set; } = GameStage.MainMenu;
+        public event Action<GameStage> StateChanged;
 
-        public static List<Level> Levels { get; set; }
-        public static Level CurrentLevel { get; set; } = null;
+        public List<Level> Levels { get; set; }
+        public Level CurrentLevel { get; set; }
 
-        static Game()
+        public Game()
         {
             Levels = LoadLevels();
         }
 
-        public static void RunLevel()
+        public void RunLevel()
         {
             CurrentLevel.Run();
             ChangeStage(GameStage.RunningLevel);
         }
 
-        private static List<Level> LoadLevels()
+        private List<Level> LoadLevels()
         {
             var levels = new List<Level>();
             foreach (var lvlName in LevelsLoader.GetLevelsNames())
@@ -34,12 +35,12 @@ namespace TowerDefence.Domain
             return levels;
         }
 
-        public static void StartChooseLevel()
+        public void StartChooseLevel()
         {
             ChangeStage(GameStage.ChoosingLevel);
         }
 
-        public static void ChoseLevel(string levelName)
+        public void ChoseLevel(string levelName)
         {
             CurrentLevel = Levels
                 .Where(lvl => lvl.Name == levelName)
@@ -47,15 +48,15 @@ namespace TowerDefence.Domain
             ChangeStage(GameStage.LevelNotStarted);
         }
 
-        public static void LoseLevel()
+        public void LoseLevel()
         {
             CurrentLevel.Lose();
             ChangeStage(GameStage.Finished);
         }
 
-        private static void ChangeStage(GameStage stage)
+        private void ChangeStage(GameStage stage)
         {
-            Game.stage = stage;
+            Stage = stage;
             StateChanged?.Invoke(stage);
         }
     }

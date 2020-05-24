@@ -43,7 +43,8 @@ namespace TowerDefence.Tests
         {
             var validLines = new[] { "31", "1" };
             var level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
-            Game.CurrentLevel = level;
+            //Game.CurrentLevel = level;
+            Game.SetLevel(level);
             var spawn = level.Field.EnemySpawnPos;
             var state = new FieldState(level.Field);
             for (int i = 0; i < 10; i++)
@@ -55,6 +56,7 @@ namespace TowerDefence.Tests
                 state.EndAct();
             }
             level.IsLost.Should().Be(true);
+            Game.Stage.Should().Be(GameStage.Finished);
         }
     }
 }
