@@ -96,7 +96,7 @@ namespace TowerDefence.View
             {
                 fieldState = new FieldState(Game.CurrentLevel.Field);
                 Game.RunLevel();
-                ClientSize = new Size(1000, 1000);
+                ClientSize = new Size(fieldState.Field.Width* Animation.ElementSize, 1000);
                 tmrSimGame.Start();
                 tmrCheckInitLevel.Stop();
             }

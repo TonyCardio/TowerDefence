@@ -12,7 +12,7 @@ namespace TowerDefence.View
 {
     public class Animation
     {
-        public const int ElementSize = 32;
+        public const int ElementSize = 45;
         public static int FrameCount;
         public static int SpriteShiftCoeff;
         public Sprite Sprite;
@@ -24,7 +24,7 @@ namespace TowerDefence.View
         public CellType CellType;
         public Rectangle HitBox;
         public ISpriteConst spriteConst;
-        public const int  BulletSize = 32;
+        public const int  BulletSize = 45;
         public int Frame;
 
         public Animation(ICreature creature, MovingCommand command, Point location, int frame, CellType type)
@@ -71,9 +71,9 @@ namespace TowerDefence.View
             var rect = new Rectangle(0, 0, ElementSize, ElementSize);
             Bitmap bitmap = null;
             if (CellType == CellType.Empty)
-                bitmap = new Bitmap(GetPath("Empty.png"));
+                bitmap = new Bitmap(GetPath("GrassSprite.png"));
             else if (CellType == CellType.Road || CellType == CellType.EnemySpawn)
-                bitmap = new Bitmap(GetPath("Road.png"));
+                bitmap = new Bitmap(GetPath("RoadSprite.png"));
             Sprite = new Sprite(bitmap, rect);
         }
 
@@ -106,6 +106,7 @@ namespace TowerDefence.View
             string path = null;
             Rectangle rectangle;
             Direction direction = Command.direction;
+            var offset = 1;
             if (Creature == null)
                 return;
             if (Creature is ShortSkeleton)
@@ -137,8 +138,9 @@ namespace TowerDefence.View
             }
             else if (Creature is Castle)
             {
-                path = GetPath("SmallSkeleton.png");
-                spriteConst = new SmallSkeletonConst();
+                path = GetPath("CastleSprite.png");
+                spriteConst = new CastleConst();
+                offset = 0;
             }
             else
                 throw new Exception("Не описанная сущность");
@@ -148,7 +150,7 @@ namespace TowerDefence.View
             this.spriteConst = spriteConst;
             SetHitBox(LocationOnField);
             LocationOnControl = new Point(LocationOnField.X * ElementSize, 
-                LocationOnField.Y * ElementSize - Sprite.SpriteSize.Height / 2);
+                LocationOnField.Y * ElementSize - (Sprite.SpriteSize.Height / 2)* offset);
             //....
         }
 
