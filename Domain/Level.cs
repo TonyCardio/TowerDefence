@@ -16,6 +16,7 @@ namespace TowerDefence.Domain
         private Timer waveTimer = new Timer();
         public Timer spawnTimer = new Timer();
         private int enemiesLeftToSpawn;
+        public bool IsLost { get; private set; }
 
         //public event Action EnemyWave;
 
@@ -70,5 +71,7 @@ namespace TowerDefence.Domain
                 spawnTimer.Stop();
             }
         }
+
+        public void Lose() => IsLost = true;
     }
 }

@@ -49,6 +49,7 @@ namespace TowerDefence.Domain
 
         public static void LoseLevel()
         {
+            CurrentLevel.Lose();
             ChangeStage(GameStage.Finished);
         }
 

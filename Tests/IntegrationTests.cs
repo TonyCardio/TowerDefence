@@ -37,5 +37,24 @@ namespace TowerDefence.Tests
             state.BeginAct();
             state.EndAct();
         }
+
+        [Test]
+        public void Game_ShouldBeLost_WhenCastleDestroyed()
+        {
+            var validLines = new[] { "31", "1" };
+            var level = LevelsLoader.LoadLevelFromLines(validLines, "Level");
+            Game.CurrentLevel = level;
+            var spawn = level.Field.EnemySpawnPos;
+            var state = new FieldState(level.Field);
+            for (int i = 0; i < 10; i++)
+            {
+                level.Field.Cells[spawn.X, spawn.Y].Creature = new HighSkeleton(level.PathSpawnToCastle);
+                state.BeginAct();
+                state.EndAct();
+                state.BeginAct();
+                state.EndAct();
+            }
+            level.IsLost.Should().Be(true);
+        }
     }
 }
