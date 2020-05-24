@@ -33,10 +33,11 @@ namespace TowerDefence.View
             LocationOnField = location;
             TargetLocation = new Point(location.X + command.DeltaX, location.Y + command.DeltaY);
             Frame = frame;
-            //SetSprite();
+            SetSprite();
+            SetHitBox(location);
             //LocationOnControl = new Point(location.X * Sprite.SpriteSize.Width + Sprite.SpriteSize.Width,
             //    location.Y * Sprite.SpriteSize.Height - Sprite.SpriteSize.Height);
-            //LocationOnControl = new Point(location.X * 32, location.Y * 32 - Sprite.SpriteSize.Height/2);
+            LocationOnControl = new Point(location.X * 32, location.Y * 32 - Sprite.SpriteSize.Height/2);
         }
 
         public Animation()
@@ -69,19 +70,15 @@ namespace TowerDefence.View
             SetFieldElement(type, location);
         }
 
-        public void SetFieldElementSprite()
+        public void SetFieldElement(CellType type, Point location)
         {
             var rect = new Rectangle(0, 0, 32, 32);
             Bitmap bitmap = null;
-            if (CellType == CellType.Empty)
+            if (type == CellType.Empty)
                 bitmap = new Bitmap(GetPath("Empty.png"));
-            else if (CellType == CellType.Road || CellType == CellType.EnemySpawn)
+            else if (type == CellType.Road || type == CellType.EnemySpawn)
                 bitmap = new Bitmap(GetPath("Road.png"));
             Sprite = new Sprite(bitmap, rect);
-        }
-
-        public void SetFieldElement(CellType type, Point location)
-        {
             LocationOnControl = new Point(location.X * 32, location.Y * 32);
             LocationOnField = location;
             CellType = type;
@@ -107,8 +104,6 @@ namespace TowerDefence.View
             var path = GetPath("HighSkeletonAndGreenMonster.png");
             var img = new Bitmap(path);
             var rect = new Rectangle(5, 150, 25, 45);
-            if (Creature == null)
-                return;
             if (Creature is ShortSkeleton)
             {
                 Sprite = new Sprite(img,rect);
@@ -130,11 +125,8 @@ namespace TowerDefence.View
                 Sprite = new Sprite(img, rect);
                 Sprite.SetPosition(new Point(0, 0));
             }
-            SetHitBox(LocationOnField);
-            LocationOnControl = new Point(LocationOnField.X * 32, 
-                LocationOnField.Y * 32 - Sprite.SpriteSize.Height / 2);
             //....
-
+                
         }
     }
 }
