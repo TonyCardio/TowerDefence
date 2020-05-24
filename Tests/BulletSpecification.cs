@@ -23,7 +23,7 @@ namespace TowerDefence.Tests
             Game.CurrentLevel = level;
             state = new FieldState(level.Field);
             bullet = new Bullet(Direction.Up);
-            level.Field.Cells[0, 1].Creature = bullet;
+            level.Field.Cells[1, 0].Creature = bullet;
         }
 
         [Test]
@@ -31,13 +31,13 @@ namespace TowerDefence.Tests
         {
             state.BeginAct();
             state.EndAct();
-            (level.Field.Cells[0, 2].Creature is Bullet).Should().BeTrue();
+            (level.Field.Cells[1, 1].Creature is Bullet).Should().BeTrue();
         }
 
         [Test]
         public void BulletDestroyedWhenGoesBeyondMap()
         {
-            for(var i= 0; i<2; i++)
+            for(var i= 0; i<3; i++)
             {
                 state.BeginAct();
                 state.EndAct();
