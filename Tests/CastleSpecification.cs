@@ -14,11 +14,11 @@ namespace TowerDefence.Tests
     [TestFixture]
     class CastleSpecification
     {
-         [Test]
-         public void CastleIsNotDestroyed_whenItCreated()
+        [Test]
+        public void CastleIsNotDestroyed_whenItCreated()
         {
             var castle = new Castle();
-            castle.IsAlive.Should().BeFalse();
+            castle.IsAlive.Should().BeTrue();
         }
 
         [Test]
@@ -27,12 +27,12 @@ namespace TowerDefence.Tests
             var castle = new Castle();
             var pathSpawnToCastle = new List<Point> { new Point(0, 0), new Point(0, 1), new Point(1, 1) };
             var enemy = new HighSkeleton(pathSpawnToCastle);
-            for(var i=0; i< 10; i++)
+            for (var i = 0; i < 10; i++)
             {
                 castle.ActionInConflict(enemy)();
             }
             castle.Health.Should().Be(0);
-            castle.IsAlive.Should().BeTrue();
+            castle.IsAlive.Should().BeFalse();
         }
     }
 }
