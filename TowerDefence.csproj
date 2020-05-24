@@ -90,6 +90,7 @@
     <Compile Include="Domain\VerticalTurret.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tests\BulletSpecification.cs" />
     <Compile Include="Tests\EnemySpecification.cs" />
     <Compile Include="Tests\IntegrationTests.cs" />
     <Compile Include="Tests\CastleSpecification.cs" />
